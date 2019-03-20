@@ -324,7 +324,7 @@ span.pass {
     <label for="email" style="color:black;" align="left"><b>Email/Username</b></label>
     <div class="input-container">
     <i class="fa fa-user-circle-o icon"></i>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Email" name="email_usr" required>
   </div>
   <label for="psw" style="color:black;" align="left"><b>Password</b></label>
   <div class="input-container">  

@@ -316,7 +316,7 @@ span.pass {
 <br>
 <center><button onclick="document.getElementById('id02').style.display='block'" class="LoginBtn Log" style="width:auto;">Register</button></center>
 <div id="id02" class="modal">
-<form method = "POST" class="modal-content animate">
+<form method = "POST" class="modal-content animate" action="userReg.jsp">
   <div class="container">
      <img src="pictures/def_profile.jpg" alt="Profile Avatar" class="avatar">
     <p class="tex"><strong>Please fill in this form to create an account.</strong></p>

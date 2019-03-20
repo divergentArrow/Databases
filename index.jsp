@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -311,7 +316,7 @@ span.pass {
 <br>
 <center><button onclick="document.getElementById('id02').style.display='block'" class="LoginBtn Log" style="width:auto;">Register</button></center>
 <div id="id02" class="modal">
-<form method = "POST" class="modal-content animate">
+<form method = "POST" class="modal-content animate" action="userReg.jsp">
   <div class="container">
      <img src="pictures/def_profile.jpg" alt="Profile Avatar" class="avatar">
     <p class="tex"><strong>Please fill in this form to create an account.</strong></p>
@@ -319,7 +324,7 @@ span.pass {
     <label for="email" style="color:black;" align="left"><b>Email/Username</b></label>
     <div class="input-container">
     <i class="fa fa-user-circle-o icon"></i>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Email" name="email_usr" required>
   </div>
   <label for="psw" style="color:black;" align="left"><b>Password</b></label>
   <div class="input-container">  

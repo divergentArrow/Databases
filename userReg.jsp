@@ -17,7 +17,7 @@
 		//Get the database connection
 
 
-		ApplicationDB db = new ApplicationDB();	
+		
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		Connection conn = DriverManager.getConnection("jdbc:mysql://dbproject.c7uz35ugmdw0.us-east-2.rds.amazonaws.com:3306/CS336")
 );

@@ -15,8 +15,12 @@
 	try {
 
 		//Get the database connection
+
+
 		ApplicationDB db = new ApplicationDB();	
-		Connection conn = db.getConnection();
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Connection conn = DriverManager.getConnection("jdbc:mysql://dbproject.c7uz35ugmdw0.us-east-2.rds.amazonaws.com:3306/CS336")
+);
 
 		//Create a SQL statement
 		Statement stmt = conn.createStatement();
@@ -27,13 +31,15 @@
 		
 
 		//Make an insert statement for the Sells table:
-		//String insert = "INSERT INTO User(Username_Email,Pass) VALUES (?,?)";
+		String insert = "INSERT INTO User(Username_Email,Pass) VALUES (?,?)";
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
-		//PreparedStatement ps = conn.prepareStatement(insert);
+		PreparedStatement ps = conn.prepareStatement(insert);
 
 		//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
-		
-		ps.executeUpdate("INSERT INTO User(Username_Email,Pass) VALUES ('"+usern+"','"+passcode+"')");
+		ps.setString(1,usern); 
+		ps.setString(2,passcode); 
+
+		ps.executeUpdate();
 
 		//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 		conn.close();

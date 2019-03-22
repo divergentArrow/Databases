@@ -22,20 +22,18 @@
 		Statement stmt = conn.createStatement();
 
 		//Get parameters from the HTML form at the index.jsp
-		String username = request.getParameter("email_usr");
+		String usern = request.getParameter("email_usr");
 		String passcode = request.getParameter("psw");
 		
 
 		//Make an insert statement for the Sells table:
-		String insert = "INSERT INTO User(Username_Email,Pass)"
-				+ "VALUES (?,?)";
+		//String insert = "INSERT INTO User(Username_Email,Pass) VALUES (?,?)";
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 		PreparedStatement ps = conn.prepareStatement(insert);
 
 		//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
-		ps.setString(1, username);
-		ps.setString(2, passcode);
-		ps.executeUpdate();
+		
+		ps.executeUpdate("INSERT INTO User(Username_Email,Pass) VALUES ('"+usern+"','"+passcode+"')");
 
 		//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 		conn.close();

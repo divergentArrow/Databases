@@ -284,7 +284,7 @@ span.pass {
   <center><button onclick="document.getElementById('id01').style.display='block'" class="LoginBtn Log" style="width:auto;">Login</button></center>
 
   <div id="id01" class="modal">
-  <form method="POST" class="modal-content animate">
+  <form method="POST" class="modal-content animate"  action="login.jsp">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="pictures/def_profile.jpg" alt="Profile Avatar" class="avatar">

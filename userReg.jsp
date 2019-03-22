@@ -27,7 +27,7 @@
 		
 
 		//Make an insert statement for the Sells table:
-		String insert = "INSERT INTO bars(Username_Email,Pass)"
+		String insert = "INSERT INTO User(Username_Email,Pass)"
 				+ "VALUES (?,?)";
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
 		PreparedStatement ps = conn.prepareStatement(insert);

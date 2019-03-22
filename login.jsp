@@ -7,7 +7,7 @@
     String userid = request.getParameter("username");   
     String pwd = request.getParameter("pass");
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbname","root", "dbpass");
+    Connection con = DriverManager.getConnection("jdbc:mysql://dbproject.c7uz35ugmdw0.us-east-2.rds.amazonaws.com:3306/CS336","root", "dbpass");
     Statement st = con.createStatement();
     ResultSet rs;
     rs = st.executeQuery("select * from User where Username_Email='" + userid + "' and Pass='" + pwd + "'");

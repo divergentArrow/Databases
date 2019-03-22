@@ -29,7 +29,7 @@
 		//Make an insert statement for the Sells table:
 		//String insert = "INSERT INTO User(Username_Email,Pass) VALUES (?,?)";
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
-		PreparedStatement ps = conn.prepareStatement(insert);
+		//PreparedStatement ps = conn.prepareStatement(insert);
 
 		//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
 		

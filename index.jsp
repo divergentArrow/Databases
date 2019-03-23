@@ -88,7 +88,7 @@ html {
 
 .bg {
 	/* The image used */
-	background-image: url("/WEB-INF/pic/back_pic.jpg");
+	background-image: url("https://i3.wp.com/www.1966mag.com/wp-content/uploads/2015/07/punta-cana-dominican-republic.jpg");
 	/* Full height */
 	height: 100%;
 	/* Center and scale the image nicely */
@@ -377,13 +377,13 @@ to {
 </style>
 </head>
 <body>
-	<div class="bg"></div>
+	<div class="bg">
 	<br>
 	<br>
 	<br>
 	<div class="head2">
 		<div class="aside">
-			<h1 style="color: RoyalBlue;" align=center>Login or Register to
+			<h1 style="color: PapayaWhip;" align=center>Login or Register to
 				Start Bidding!</h1>
 			<br>
 			<center>
@@ -481,6 +481,7 @@ window.onclick = function(event) {
     }
 }
 </script>
+	</div>
 	</div>
 </body>
 </html>

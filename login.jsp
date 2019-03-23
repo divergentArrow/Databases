@@ -4,11 +4,13 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%
+	ApplicationDB db = new ApplicationDB();		
+	Connection conn = db.getConnection();
+
     String userid = request.getParameter("username");   
     String pwd = request.getParameter("pass");
-    Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://dbproject.c7uz35ugmdw0.us-east-2.rds.amazonaws.com:3306/CS336","root", "dbpass");
-    Statement st = con.createStatement();
+   
+    Statement st = conn.createStatement();
     ResultSet rs;
     rs = st.executeQuery("select * from User where Username_Email='" + userid + "' and Pass='" + pwd + "'");
     if (rs.next()) {
@@ -17,6 +19,6 @@
         out.println("<a href='logout.jsp'>Log out</a>");
         response.sendRedirect("success.jsp");
     } else {
-        out.println("Invalid password <a href='login.jsp'>try again</a>");
+        out.println("Invalid password <a href='index.jsp'>try again</a>");
     }
 %>

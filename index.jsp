@@ -279,7 +279,7 @@ span.pass {
   <br>
   <div class="head2">
     <div class="aside">
-    <h1 style="color:white;"><center>Login Page</center></h1>
+    <h1 style="color:red;"><center>Login Page</center></h1>
   <br>
   <center><button onclick="document.getElementById('id01').style.display='block'" class="LoginBtn Log" style="width:auto;">Login</button></center>
 
@@ -340,7 +340,7 @@ span.pass {
 </div>
 </div>
   <div class="footer">
-    <h3 style="color:white;"><center> Login or Signup!</center></h3>
+    <h3 style="color:red;"><center> Login or Signup!</center></h3>
   </div>
 </div>
 <script>

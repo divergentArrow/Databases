@@ -12,7 +12,6 @@
 
 	<%
 	try {
-
 		//Get the database connection
 		ApplicationDB db = new ApplicationDB();	
 		Connection conn = db.getConnection();
@@ -24,6 +23,51 @@
 		String usern = request.getParameter("email_usr");
 		String passcode = request.getParameter("psw");
 		
+		
+		
+			//  check if email already used
+	    String checkEmailStr = "SELECT * FROM User WHERE Username_Email='" + usern + "'";
+		System.out.println(checkEmailStr);
+
+		ResultSet checkEmailResult = stmt.executeQuery(checkEmailStr);
+		if(checkEmailResult.next() ){
+			System.out.println("email used!");
+			%> 
+			<!-- if error, show the alert and go back to login page --> 
+			<script> 
+			    alert("Sorry, but the email you entered has been used");
+			    window.location.href = "index.jsp";
+			</script>
+			<%
+			return;
+		}
+		
+		
+		//check the password length
+			if( passcode.length() < 8 ){
+			System.out.println("password too short!");
+			%> 
+			<!-- if error, show the alert and go back to login page -->	
+				
+			<script> 
+			    alert("Sorry, the password should be at least 8 characters");
+			    window.location.href = "index.jsp";
+			</script>
+			<%
+			return;			
+		    }
+	 		else if( passcode.length() > 45 ){
+			System.out.println("password too long!");
+			%> 
+			<!-- if error, show the alert and go back to login page --> 
+			<script> 
+			    alert("Sorry, the password should be at most 45 characters");
+			    window.location.href = "index.jsp";
+			</script>
+			<%
+			return;			
+		   }  
+			
 		//Make an insert statement for the Sells table:
 		String insert = "INSERT INTO User(Username_Email,Pass) VALUES (? , ?)";
 		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
@@ -32,7 +76,6 @@
 		ps.setString(1,usern); 
 		ps.setString(2,passcode); 
 		ps.executeUpdate();
-
 		//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 		conn.close();
 		out.println("insert succeeded ");
@@ -46,13 +89,3 @@
 		out.println("insert failed");
 	}
 %>
-
-
-
-
-
-
-
-
-</body>
-</html>	

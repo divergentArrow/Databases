@@ -3,7 +3,8 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%
+session = request.getSession();
 session.invalidate();
-session.getAttribute("user");   //this will throw an error
+//session.getAttribute("user");   //this will throw an error
 response.sendRedirect("index.jsp");
 %>

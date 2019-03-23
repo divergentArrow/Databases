@@ -287,7 +287,7 @@ span.pass {
   <form method="POST" class="modal-content animate"  action="login.jsp">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="pictures/def_profile.jpg" alt="Profile Avatar" class="avatar">
+      
     </div>
 
     <div class="container">
@@ -318,7 +318,6 @@ span.pass {
 <div id="id02" class="modal">
 <form method = "POST" class="modal-content animate" action="userReg.jsp">
   <div class="container">
-     <img src="pictures/def_profile.jpg" alt="Profile Avatar" class="avatar">
     <p class="tex"><strong>Please fill in this form to create an account.</strong></p>
     <hr>
     <label for="email" style="color:black;" align="left"><b>Email/Username</b></label>

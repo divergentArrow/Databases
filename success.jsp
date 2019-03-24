@@ -34,7 +34,9 @@
 	background-size: cover;
 	height: 100%;
 }
-
+a {
+font-size: 20px;
+}
 </style>
 </head>
 <body>

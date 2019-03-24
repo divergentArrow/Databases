@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <!DOCTYPE html>
-<html>
+<html class="bg">
 <head>
 <title>Welcome!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,16 +15,24 @@
   color: #ffffff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
+.box2{
+  padding: 4px 4px;
+  margin-bottom: 7px;
+  margin-top: 7px; 
+  background-color: Brown;
+  color: Cornsilk ;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 20%;
+}
 .box1:hover {
   background-color: #0099cc;
 }
-body{
+.bg{
 	background-image: url("https://i.imgur.com/Qbv02Bu.jpg?");
-	overflow: hidden;
-	width:auto;
-	height:auto;
-	margin: 0;
-	padding: 0;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
 }
 
 </style>
@@ -39,8 +47,12 @@ body{
 	} 
 	else {
 	%>
-	<h2 align=center style="color:blue">
-	Welcome <%=session.getAttribute("user")%>!</h2>  <!--//this will display the username that is stored in the session.-->
+	<center>
+	<div align="center" class=box2>
+	<h1 align=center >
+	Welcome <%=session.getAttribute("user")%>!</h1>
+	</div>  <!--//this will display the username that is stored in the session.-->
+	</center>
 	<br>
 	<br>
 	<a href='logout.jsp' class=box1>Log out</a>

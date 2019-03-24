@@ -19,8 +19,17 @@
 .box1:hover {
   background-color: #0099cc;
 }
+body{
+	background-image: url("https://i.imgur.com/Qbv02Bu.jpg?");
+	overflow: hidden;
+	width:auto;
+	height:auto;
+	margin: 0;
+	padding: 0;
+}
 </style>
 <%
+out.println("<body>");
 	ApplicationDB db = new ApplicationDB();		
 	Connection conn = db.getConnection();
 
@@ -36,6 +45,6 @@
         out.println("<a href='logout.jsp'>Log out</a>");
         response.sendRedirect("success.jsp");
     } else {
-        out.println("<br><h3 align=center>Error! Invalid Username or Password</h3><a href='index.jsp' class=box1>Try Again</a>");
+        out.println("<br><h1 align=center>Error! Invalid Username or Password</h1><div align='center'><a href='index.jsp' class=box1>Try Again</a></div></body></html>");
     }
 %>

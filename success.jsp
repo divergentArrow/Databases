@@ -18,6 +18,15 @@
 .box1:hover {
   background-color: #0099cc;
 }
+body{
+	background-image: url("https://i.imgur.com/Qbv02Bu.jpg?");
+	overflow: hidden;
+	width:auto;
+	height:auto;
+	margin: 0;
+	padding: 0;
+}
+
 </style>
 <%
     if ((session.getAttribute("user") == null)) {
@@ -28,7 +37,7 @@
 	} 
 	else {
 	%>
-	<h2 align=center>
+	<h2 align=center style="color:blue">
 	Welcome <%=session.getAttribute("user")%>!</h2>  <!--//this will display the username that is stored in the session.-->
 	<br>
 	<br>

@@ -3,29 +3,40 @@
     pageEncoding="ISO-8859-1" import="cs336project.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<html>
+<html class="bg">
 <head>
 <title>Welcome!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 .box1{
-  padding: 12px 12px;
+  padding: 24px 24px;
   margin-bottom: 7px;
   margin-top: 7px; 
-  background-color: #33b5e5;
+  background-color: DarkRed ;
   color: #ffffff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .box1:hover {
-  background-color: #0099cc;
+  background-color: FireBrick  ;
 }
-body{
+.box2{
+  padding: 6px 6px;
+  margin-bottom: 7px;
+  margin-top: 7px; 
+  background-color: Brown;
+  color: black ;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 40%;
+}
+.bg{
 	background-image: url("https://i.imgur.com/Qbv02Bu.jpg?");
-	overflow: hidden;
-	width:auto;
-	height:auto;
-	margin: 0;
-	padding: 0;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+}
+a {
+font-size: 30px;
 }
 </style>
 <%
@@ -45,6 +56,6 @@ out.println("<body>");
         out.println("<a href='logout.jsp'>Log out</a>");
         response.sendRedirect("success.jsp");
     } else {
-        out.println("<br><h1 align=center>Error! Invalid Username or Password</h1><div align='center'><a href='index.jsp' class=box1>Try Again</a></div></body></html>");
+        out.println("<br><center><div align=center class=box2><h1 align=center>Error! Invalid Username or Password</h1></div></center><br><br><div align=center><a href='index.jsp' class=box1>Try Again</a></div></body></html>");
     }
 %>

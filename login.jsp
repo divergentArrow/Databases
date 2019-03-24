@@ -36,6 +36,6 @@
         out.println("<a href='logout.jsp'>Log out</a>");
         response.sendRedirect("success.jsp");
     } else {
-        out.println("<br><h3 align=center>Error! Invalid Username or Password</h3> <a href='index.jsp' class=box1>Try Again</a>");
+        out.println("<br><h3 align=center>Error! Invalid Username or Password</h3><a href='index.jsp' class=box1>Try Again</a>");
     }
 %>

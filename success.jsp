@@ -28,6 +28,8 @@ body{
 }
 
 </style>
+</head>
+<body>
 <%
     if ((session.getAttribute("user") == null)) {
 	%>
@@ -42,6 +44,8 @@ body{
 	<br>
 	<br>
 	<a href='logout.jsp' class=box1>Log out</a>
+	</body>
+	</html>
 	<%
 	}
 	%>

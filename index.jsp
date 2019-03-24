@@ -4,7 +4,7 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <!DOCTYPE html>
-<html>
+<html class="bg">
 <head>
 <title>Login or Register Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -377,7 +377,6 @@ to {
 </style>
 </head>
 <body>
-	<div class="bg">
 	<br>
 	<br>
 	<br>
@@ -402,9 +401,9 @@ to {
 					</div>
 
 					<div class="container">
-						<h3>
-							<center>Login</center>
-						</h3>
+						<h2 style="color: royalblue";>
+							<center><strong>Login</strong></center>
+						</h2>
 						<label for="user" style="color: black;" align="left"><b>Username/Email</b></label><br>
 						<div class="input-container">
 							<i class="fa fa-user-circle-o icon"></i> <input type="text"
@@ -481,7 +480,6 @@ window.onclick = function(event) {
     }
 }
 </script>
-	</div>
 	</div>
 </body>
 </html>

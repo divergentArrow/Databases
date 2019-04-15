@@ -10,22 +10,23 @@ import javax.servlet.http.HttpSession;
 
 
 public class Seller {
-	public static String test() {
-		return "foo";
+	public ResultSet rs;
+	public HttpSession session;
+	public ApplicationDB db;
+	public Connection conn;
+	public Statement st;
+	public String sesh;
+	
+	public Seller(HttpSession session) throws Exception{
+		db = new ApplicationDB();
+		conn = db.getConnection();
+		st = conn.createStatement();
+		sesh = session.getAttribute("user").toString();
+		rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "'");
 	}
 	
-	public static List<String[]> listSellerItems(HttpSession session) {
-		ApplicationDB db = new ApplicationDB();
-		Connection conn = db.getConnection();
+	public List<String[]> listSellerItems() {
 		try {
-			Statement st = conn.createStatement();
-			ResultSet rs;
-			String sesh = session.getAttribute("user").toString();
-			if(sesh != null) {
-				rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "'");
-			} else {
-				rs = st.executeQuery("SELECT * FROM Auction a");
-			}
 			String s = "";
 			int auctionRowSize = rs.getMetaData().getColumnCount();//7;
 			String[] sArr = new String[auctionRowSize];
@@ -46,11 +47,11 @@ public class Seller {
 		return null;
 	}
 	
-	public static String makeListReadable(List<String[]> list) {
+	public String makeListReadable(List<String[]> list) {
 		String s = "";
 		for(String[] row:list) {
 			for(String item:row) {
-				s = s + item + "\t";
+				s = s + item + "\t\t";
 			}
 			s = s + "\n";
 		}

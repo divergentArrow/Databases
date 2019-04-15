@@ -17,11 +17,12 @@
 		<button type="button" id="startAuction">Start Auction</button>
 	</div>
 	<div>
+		<br></br>
 		My Items
 		<br></br>
 		[Insert items table for seller here]
-		
-		<%= cs336project.Seller.displaySellerItems(session) %>
+		<br></br>
+		<%= cs336project.Seller.makeListReadable(cs336project.Seller.listSellerItems(session))%>
 	</div>
 </body>
 

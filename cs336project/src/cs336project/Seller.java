@@ -3,6 +3,8 @@ package cs336project;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +14,7 @@ public class Seller {
 		return "foo";
 	}
 	
-	public static String displaySellerItems(HttpSession session) {
+	public static List<String[]> listSellerItems(HttpSession session) {
 		ApplicationDB db = new ApplicationDB();
 		Connection conn = db.getConnection();
 		try {
@@ -20,23 +22,39 @@ public class Seller {
 			ResultSet rs;
 			String sesh = session.getAttribute("user").toString();
 			if(sesh != null) {
-				rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE " + session.getAttribute("user"));
+				rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "'");
 			} else {
 				rs = st.executeQuery("SELECT * FROM Auction a");
 			}
-			System.out.println("Executed displaySellerItems query");
 			String s = "";
+			int auctionRowSize = rs.getMetaData().getColumnCount();//7;
+			String[] sArr = new String[auctionRowSize];
+			ArrayList<String[]> allColumns = new ArrayList<String[]>();
 			while(rs.next()) {
-				s = rs.getString(1);
+				for(int i=1; i<=auctionRowSize; i++) {
+					s = rs.getString(i);
+					sArr[i-1] = s;
+				}
+				allColumns.add(sArr);
 			}
-			System.out.println(s);
 			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 			conn.close();
-			return s;
+			return allColumns;
 		} catch(Exception e) {
 			System.out.println(e);
 		}
 		return null;
+	}
+	
+	public static String makeListReadable(List<String[]> list) {
+		String s = "";
+		for(String[] row:list) {
+			for(String item:row) {
+				s = s + item + "\t";
+			}
+			s = s + "\n";
+		}
+		return s;
 	}
 	
 }

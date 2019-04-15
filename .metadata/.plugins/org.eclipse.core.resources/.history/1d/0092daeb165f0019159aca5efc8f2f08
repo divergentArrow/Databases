@@ -1,0 +1,33 @@
+package cs336project;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+
+public class Seller {
+	public static String test() {
+		return "foo";
+	}
+	
+	public static String displaySellerItems() {
+		ApplicationDB db = new ApplicationDB();
+		Connection conn = db.getConnection();
+		try {
+			Statement st = conn.createStatement();
+			ResultSet rs;
+			rs = st.executeQuery("select * from Seller");
+			System.out.println("Executed query");
+			String s = "";
+			while(rs.next()) {
+				s = rs.getString(1);
+			}
+			System.out.println(s);
+			return s;
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+}

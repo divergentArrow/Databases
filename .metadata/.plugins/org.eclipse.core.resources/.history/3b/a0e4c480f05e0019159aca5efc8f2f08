@@ -1,0 +1,7 @@
+package cs336project;
+
+public class Seller {
+	public static String foo() {
+		return "foo";
+	}
+}

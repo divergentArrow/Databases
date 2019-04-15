@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Sell</title>
+</head>
+
+<body>
+	<div>
+		Set characteristics of item: <input type="text" name="item"><br>
+		Set closing date: <input type="text" name="cdate"><br>
+		Set closing time: <input type="text" name="ctime"><br>
+	</div>
+	<div>
+		My Items
+		<br></br>
+		[Insert items table for seller here]
+		<%--<%= cs336project.Seller.test() %>--%>
+	</div>
+</body>
+
+</html>

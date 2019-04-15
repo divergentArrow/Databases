@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Sell</title>
+</head>
+
+<body>
+	<div>
+		Set characteristics of item: <input type="text" name="item"><button type="button" id="setCharacteristicsButton"><br>
+		Set closing date: <input type="text" id="cdate"><button type="button" id="setDateButton">Set</button><br>
+		Set closing time: <input type="text" id="ctime"><button type="button" id="setTimeButton">Set</button><br>
+		Set minimum price: <input type="text" id="minPrice"><button type="button" id="setMinPriceButton">Set</button><br>
+	</div>
+	<div>
+		My Items
+		<br></br>
+		[Insert items table for seller here]
+		<%--<%= cs336project.Seller.test() %>--%>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+package cs336project;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.http.HttpSession;
+
+
+public class Seller {
+	public static String test() {
+		return "foo";
+	}
+	
+	public static String displaySellerItems(HttpSession session) {
+		ApplicationDB db = new ApplicationDB();
+		Connection conn = db.getConnection();
+		try {
+			Statement st = conn.createStatement();
+			ResultSet rs;
+			String sesh = session.getAttribute("user").toString();
+			if(sesh != null) {
+				rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE " + session.getAttribute("user"));
+			} else {
+				rs = st.executeQuery("SELECT * FROM Auction a");
+			}
+			System.out.println("Executed displaySellerItems query");
+			String s = "";
+			while(rs.next()) {
+				s = rs.getString(1);
+			}
+			System.out.println(s);
+			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
+			conn.close();
+			return s;
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+}

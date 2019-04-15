@@ -1,0 +1,21 @@
+package cs336project;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+
+public class Seller {
+	public static String test() {
+		return "foo";
+	}
+	
+	public static ResultSet displaySellerItems() {
+		ApplicationDB db = new ApplicationDB();		
+		Connection conn = db.getConnection();
+		Statement st = conn.createStatement();
+		ResultSet rs;
+		rs = st.executeQuery("select * from User where Username_Email='" + userid + "' and Pass='" + pwd + "'");
+	}
+	
+}

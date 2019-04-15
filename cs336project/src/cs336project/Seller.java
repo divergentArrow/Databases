@@ -1,5 +1,6 @@
 package cs336project;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -21,6 +22,7 @@ public class Seller {
 		db = new ApplicationDB();
 		conn = db.getConnection();
 		st = conn.createStatement();
+		this.session = session;
 		sesh = session.getAttribute("user").toString();
 		rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "'");
 	}
@@ -62,6 +64,9 @@ public class Seller {
 		try {
 			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='" + cdt + "', minPrice=" + minPrice + " WHERE vin=" + vin + ";";
 			int success = st.executeUpdate(query);
+			if(success == 0) {
+				isUpdated = false;
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Error in input");
@@ -75,12 +80,66 @@ public class Seller {
 		try {
 			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='" + cdt + "' WHERE vin=" + vin + ";";
 			int success = st.executeUpdate(query);
+			if(success == 0) {
+				isUpdated = false;
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Error in input");
 			isUpdated=false;
 		}
 		return isUpdated;
+	}
+	
+	public boolean addAuction(String vin, String sdt, String cdt, String minPrice) {
+		boolean isAdded = true;
+		try {
+			ResultSet auctionIds = st.executeQuery("SELECT Auction_ID FROM Auction");
+			int maxId = -1;
+			while(auctionIds.next()) {
+				if(auctionIds.getInt(1) >= maxId) maxId=auctionIds.getInt(1);
+			}
+			int insertId = maxId + 1;
+			String query = "INSERT INTO Auction VALUES('TBD', '";
+			query = query.concat(sdt);
+			query = query + "', ";
+			query = query + insertId;
+			query = query + ", '";
+			query = query + session.getAttribute("user");
+			query = query + "', 'monkey', ";
+			query = query + vin;
+			query = query + ", '";
+			query = query + cdt;
+			query = query + "', ";
+			query = query + minPrice + ");";
+			int update = st.executeUpdate(query);
+			if(update == 0) isAdded = false;
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isAdded=false;
+		}
+		return isAdded;
+	}
+	
+	public boolean addAuction(String vin, String sdt, String cdt) {
+		boolean isAdded = true;
+		try {
+			ResultSet auctionIds = st.executeQuery("SELECT Auction_ID FROM Auction");
+			int maxId = -1;
+			while(auctionIds.next()) {
+				if(auctionIds.getInt(1) >= maxId) maxId=auctionIds.getInt(1);
+			}
+			int insertId = maxId + 1;
+			String query = "INSERT INTO Auction VALUES('TBD', '" + sdt + "', " + insertId + ", '" + session.getAttribute("user") + "', 'N/A', " + vin + ", '" + cdt + ";";
+			int update = st.executeUpdate(query);
+			if(update == 0) isAdded = false;
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isAdded=false;
+		}
+		return isAdded;
 	}
 	
 	public void closeConnection() throws Exception{

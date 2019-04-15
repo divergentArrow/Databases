@@ -11,7 +11,7 @@
 
 <body>
 	<div>
-		Modify item characteristics
+		Modify item characteristics or add an auction
 		<br></br>
 		<form action="sellerModify.jsp" method="post">
 		VIN: <input type="text" id="vin" name="vin" placeholder="123456789"><br>
@@ -20,7 +20,14 @@
 		Set minimum price: <input type="text" id="minPrice" name="minPrice" placeholder="123.45"/><br>
 		<button type="submit" name="button" value="modifyItem">Modify Item</button><br>
 		</form>
-		<button type="submit" name="button" value="startAuction">Start Auction</button>
+		<br></br>
+		<form action="sellerAddAuction.jsp" method="post">
+		VIN: <input type="text" id="vin" name="vin" placeholder="123456789"><br>
+		Set start date and time: <input type="text" id="sdt" name="sdt" placeholder="YYYY-MM-DD HH:MM:SS"/><br>
+		Set closing date and time: <input type="text" id="cdt" name="cdt" placeholder="YYYY-MM-DD HH:MM:SS"/><br>
+		Set minimum price: <input type="text" id="minPrice" name="minPrice" placeholder="123.45"/><br>
+		<button type="submit" name="button" value="addAuction">Add Auction</button><br>
+		</form>
 	</div>
 	<div>
 		<br></br>
@@ -55,6 +62,8 @@
 		<%
 			}
 		%>
+		<a href='success.jsp' class=box1>Welcome</a><br>
+		<a href='logout.jsp' class=box1>Log out</a>
 		</table>
 	</div>
 </body>

@@ -13,12 +13,14 @@
 	<div>
 		Modify item characteristics
 		<br></br>
-		VIN: <input type="text" id="vin" placeholder="123456789">
-		Set start date and time: <input type="text" id="sdt" placeholder="YYYY-MM-DD HH:MM:SS">
-		Set closing date and time: <input type="text" id="cdt" placeholder="YYYY-MM-DD HH:MM:SS">
-		Set minimum price: <input type="text" id="minPrice" placeholder="123.45">
-		<button type="button" id="modifyItem">Modify Item</button>
-		<button type="button" id="startAuction">Start Auction</button>
+		<form action="sellerModify.jsp" method="post">
+		VIN: <input type="text" id="vin" name="vin" placeholder="123456789"><br>
+		Set start date and time: <input type="text" id="sdt" name="sdt" placeholder="YYYY-MM-DD HH:MM:SS"/><br>
+		Set closing date and time: <input type="text" id="cdt" name="cdt" placeholder="YYYY-MM-DD HH:MM:SS"/><br>
+		Set minimum price: <input type="text" id="minPrice" name="minPrice" placeholder="123.45"/><br>
+		<button type="submit" name="button" value="modifyItem">Modify Item</button><br>
+		</form>
+		<button type="submit" name="button" value="startAuction">Start Auction</button>
 	</div>
 	<div>
 		<br></br>

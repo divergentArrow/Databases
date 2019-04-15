@@ -39,7 +39,6 @@ public class Seller {
 				allColumns.add(sArr);
 			}
 			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
-			conn.close();
 			return allColumns;
 		} catch(Exception e) {
 			System.out.println(e);
@@ -56,6 +55,36 @@ public class Seller {
 			s = s + "\n";
 		}
 		return s;
+	}
+	
+	public boolean updateItem(String vin, String sdt, String cdt, String minPrice) {
+		boolean isUpdated = true;
+		try {
+			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='" + cdt + "', minPrice=" + minPrice + " WHERE vin=" + vin + ";";
+			int success = st.executeUpdate(query);
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isUpdated=false;
+		}
+		return isUpdated;
+	}
+	
+	public boolean updateItem(String vin, String sdt, String cdt) {
+		boolean isUpdated = true;
+		try {
+			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='" + cdt + "' WHERE vin=" + vin + ";";
+			int success = st.executeUpdate(query);
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isUpdated=false;
+		}
+		return isUpdated;
+	}
+	
+	public void closeConnection() throws Exception{
+		conn.close();
 	}
 	
 }

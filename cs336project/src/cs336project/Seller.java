@@ -28,7 +28,7 @@ public class Seller {
 	public List<String[]> listSellerItems() {
 		try {
 			String s = "";
-			int auctionRowSize = rs.getMetaData().getColumnCount();//7;
+			int auctionRowSize = rs.getMetaData().getColumnCount();//8;
 			String[] sArr = new String[auctionRowSize];
 			ArrayList<String[]> allColumns = new ArrayList<String[]>();
 			while(rs.next()) {

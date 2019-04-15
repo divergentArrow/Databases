@@ -19,15 +19,24 @@
 			String sdt = request.getParameter("sdt");
 			String cdt = request.getParameter("cdt");
 			String minPrice = request.getParameter("minPrice");
+			boolean success = false;
 			if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()){
 				if(minPrice.isEmpty()){
-					seller.updateItem(vin, sdt, cdt);
+					success = seller.updateItem(vin, sdt, cdt);
 				} else{
-					seller.updateItem(vin, sdt, cdt, minPrice);
+					success = seller.updateItem(vin, sdt, cdt, minPrice);
 				}
 			}
+			
+			if(success){
+				out.println("Success! Item modification request sent.<br>");
+				out.println("This does NOT mean the request was valid!<br>");
+				out.println("Return to Seller page to see result.<br>");
+			}
+			else{
+				out.println("Error with input! Try again.<br>");
+			}
 		%>
-	Item modification request sent.
 	<a href='seller.jsp' class=box1>Return to Seller page</a>
 	</div>
 </body>

@@ -34,9 +34,28 @@
 	background-size: cover;
 	height: 100%;
 }
+.box3{
+  padding: 4px 4px;
+  margin-bottom: 7px;
+  margin-top: 7px; 
+  background-color: Brown;
+  color: Cornsilk ;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 20%;
+}
+.box3:hover {
+  background-color: #0099cc;
+}
 a {
 font-size: 20px;
 }
+.tabItem{
+ background-color: Brown;
+  color: Cornsilk ;
+  align: center;}
+td{
+align: center;}
+
 </style>
 </head>
 <body>
@@ -57,6 +76,9 @@ font-size: 20px;
 	</center>
 	<br>
 	<br>
+		<center><div align="center" class=box3><A HREF="itemTable.jsp" ><h2 style="color:white">Show data from table</h2></A></div></center>
+<br>
+<br>
 	<a href='logout.jsp' class=box1>Log out</a>
 	</body>
 	</html>

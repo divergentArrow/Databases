@@ -63,9 +63,9 @@
 		<%
 			}
 		%>
-		<a href='success.jsp' class=box1>Welcome</a><br>
-		<a href='logout.jsp' class=box1>Log out</a>
 		</table>
+		<a href='success.jsp' class=box1>Home</a><br>
+		<a href='logout.jsp' class=box1>Log out</a>
 	</div>
 </body>
 

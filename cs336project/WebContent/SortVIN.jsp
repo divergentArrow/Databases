@@ -89,9 +89,9 @@ ResultSet rs = null;
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryCar = "SELECT * from Cars order by Cylinders;";
+String QueryV = "SELECT * from Vehicle order by VIN;";
 
-rs = statement.executeQuery(QueryCar);
+rs = statement.executeQuery(QueryV);
 
 %>
 <div class="dropdown">
@@ -103,7 +103,7 @@ rs = statement.executeQuery(QueryCar);
     <a href="SortColor.jsp">Color</a>
     <a href="SortPosted.jsp">Posted_Date</a>
     <a href="DateSold.jsp">Sold Date</a>
-    <a href="SortVIN.jsp">VIN</a>
+    <a href=SortVIN.jsp>VIN</a>
     <a href="SortCylinders.jsp">Cylinders</a>
     <a href="SortAxles.jsp">Axles</a>
     <a href="SortSeats.jsp">Seats</a>    
@@ -113,7 +113,7 @@ rs = statement.executeQuery(QueryCar);
 <TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
 <TR>
 <th colspan="8">
-Cars
+Vehicles
 </th>
 </TR>
 
@@ -125,21 +125,19 @@ Cars
 <td>Date Sold</td>
 <td>Date Posted</td>
 <td>VIN</td>
-<td>Cylinders</td>
 </TR>
 <%
 while (rs.next()) {
 %>
 
 <TR>
-<TD><%=rs.getString(1)%></TD>
 <TD><%=rs.getString(2)%></TD>
-<TD><%=rs.getInt(3)%></TD>
 <TD><%=rs.getString(4)%></TD>
-<TD><%=rs.getDate(5)%></TD>
+<TD><%=rs.getInt(3)%></TD>
+<TD><%=rs.getString(5)%></TD>
+<TD><%=rs.getDate(7)%></TD>
 <TD><%=rs.getDate(6)%></TD>
-<TD><%=rs.getInt(7)%></TD>
-<TD><%=rs.getInt(8)%></TD>
+<TD><%=rs.getInt(1)%></TD>
 </TR>
 
 <% } %>

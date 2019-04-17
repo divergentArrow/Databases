@@ -89,13 +89,15 @@ ResultSet rsTruck=null;
 /* createStatement() is used for create statement object that is used for 
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
+Statement statement1 = conn.createStatement();
+Statement statement2 = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryCar = "SELECT * from Cars;";
-String QueryTruck = "SELECT * from Truck";
-String QuerySuv = "SELECT * from Suv";
+String QueryCar = "SELECT * FROM Cars;";
+String QueryTruck = "SELECT * FROM Truck;";
+String QuerySuv = "SELECT * FROM Suv;";
 rs = statement.executeQuery(QueryCar);
-rsSuv = statement.executeQuery(QuerySuv);
-rsTruck = statement.executeQuery(QueryTruck);
+rsSuv = statement1.executeQuery(QuerySuv);
+rsTruck = statement2.executeQuery(QueryTruck);
 
 %>
 <div class="dropdown">
@@ -149,7 +151,9 @@ while (rs.next()) {
 
 <% } %>
 <TR>
-<TD>Suvs</TD>
+<th colspan="8">
+Suvs
+</th>
 </TR>
 <TR>
 <td>Make</td>
@@ -178,7 +182,9 @@ while (rsSuv.next()) {
 
 <% } %>
 <TR>
-<TD>Trucks</TD>
+<th colspan="8">
+Trucks
+</th>
 </TR>
 <TR>
 <td>Make</td>
@@ -219,7 +225,6 @@ conn.close();
 %>
 
 <%
-out.println("Can't connect to database.");
 }
 %>
 </TABLE>

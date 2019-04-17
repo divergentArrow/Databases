@@ -31,8 +31,8 @@ font-size:22px;
 padding: 5px;
 }
 .dropbtn {
-  background-color: #3498DB;
-  color: white;
+  background-color: yellow;
+  color: black;
   padding: 12px;
   font-size: 16px;
   border: none;
@@ -222,13 +222,12 @@ out.println("Can't connect to database.");
 }
 %>
 </TABLE>
+<br>
+<br>
+<div align=center>
+<FORM ACTION="success.jsp" method="get" >
+<button type="submit"><-- Main Menu</button>
 </div>
-<TABLE>
-<TR>
-<TD><FORM ACTION="success.jsp" method="get" >
-<button type="submit"><-- GO BACK</button></TD>
-</TR>
-</TABLE>
 <script>
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */

@@ -156,12 +156,12 @@ out.println("Can't connect to database.");
 %>
 </TABLE>
 </div>
-<TABLE>
-<TR>
-<TD><FORM ACTION="success.jsp" method="get" >
-<button type="submit"><-- GO BACK</button></TD>
-</TR>
-</TABLE>
+<br>
+<br>
+<div align=center>
+<FORM ACTION="success.jsp" method="get" >
+<button type="submit"><-- Main Menu</button>
+</div>
 <script>
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */

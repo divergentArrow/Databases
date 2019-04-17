@@ -33,8 +33,8 @@ public class User {
 		return isCrep;
 	}
 
-	public void setCrepS(boolean is_customer_rep) {
-		this.isCrep = is_customer_rep;
+	public void setCrepS(boolean iscRep) {
+		this.isCrep = iscRep;
 	}
 
 	public boolean getAdmS() {

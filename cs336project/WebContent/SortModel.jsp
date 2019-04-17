@@ -33,7 +33,7 @@ padding: 5px;
 .dropbtn {
   background-color: #3498DB;
   color: white;
-  padding: 12px;
+  padding: 16px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -60,7 +60,7 @@ padding: 5px;
 
 .dropdown-content a {
   color: black;
-  padding: 10px 14px;
+  padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
@@ -83,19 +83,15 @@ Connection conn = db.getConnection();
 
 //declare a resultset that uses as a table for output data from tha table.
 ResultSet rs = null;
-ResultSet rsSuv=null;
-ResultSet rsTruck=null;
+
 
 /* createStatement() is used for create statement object that is used for 
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryCar = "SELECT * from Cars;";
-String QueryTruck = "SELECT * from Truck";
-String QuerySuv = "SELECT * from Suv";
-rs = statement.executeQuery(QueryCar);
-rsSuv = statement.executeQuery(QuerySuv);
-rsTruck = statement.executeQuery(QueryTruck);
+String QueryV = "SELECT * from Vehicle order by Model;";
+
+rs = statement.executeQuery(QueryV);
 
 %>
 <div class="dropdown">
@@ -117,7 +113,7 @@ rsTruck = statement.executeQuery(QueryTruck);
 <TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
 <TR>
 <th colspan="8">
-Cars
+Vehicles
 </th>
 </TR>
 
@@ -129,80 +125,19 @@ Cars
 <td>Date Sold</td>
 <td>Date Posted</td>
 <td>VIN</td>
-<td>Cylinders</td>
 </TR>
 <%
 while (rs.next()) {
 %>
 
 <TR>
-<TD><%=rs.getString(1)%></TD>
 <TD><%=rs.getString(2)%></TD>
-<TD><%=rs.getInt(3)%></TD>
 <TD><%=rs.getString(4)%></TD>
-<TD><%=rs.getDate(5)%></TD>
+<TD><%=rs.getInt(3)%></TD>
+<TD><%=rs.getString(5)%></TD>
+<TD><%=rs.getDate(7)%></TD>
 <TD><%=rs.getDate(6)%></TD>
-<TD><%=rs.getInt(7)%></TD>
-<TD><%=rs.getInt(8)%></TD>
-</TR>
-
-<% } %>
-<TR>
-<TD>Suvs</TD>
-</TR>
-<TR>
-<td>Make</td>
-<td>Model</td>
-<td>Price</td>
-<td>Color</td>
-<td>Date Sold</td>
-<td>Date Posted</td>
-<td>VIN</td>
-<td>Seats</td>
-</TR>
-<% 
-while (rsSuv.next()) {
-%>
-
-<TR>
-<TD><%=rsSuv.getString(1)%></TD>
-<TD><%=rsSuv.getString(2)%></TD>
-<TD><%=rsSuv.getInt(3)%></TD>
-<TD><%=rsSuv.getString(4)%></TD>
-<TD><%=rsSuv.getDate(5)%></TD>
-<TD><%=rsSuv.getDate(6)%></TD>
-<TD><%=rsSuv.getInt(7)%></TD>
-<TD><%=rsSuv.getInt(8)%></TD>
-</TR>
-
-<% } %>
-<TR>
-<TD>Trucks</TD>
-</TR>
-<TR>
-<td>Make</td>
-<td>Model</td>
-<td>Price</td>
-<td>Color</td>
-<td>Date Sold</td>
-<td>Date Posted</td>
-<td>VIN</td>
-<td>Axles</td>
-</TR>
-
-<% 
-while (rsTruck.next()) {
-%>
-
-<TR>
-<TD><%=rsTruck.getString(1)%></TD>
-<TD><%=rsTruck.getString(2)%></TD>
-<TD><%=rsTruck.getInt(3)%></TD>
-<TD><%=rsTruck.getString(4)%></TD>
-<TD><%=rsTruck.getDate(5)%></TD>
-<TD><%=rsTruck.getDate(6)%></TD>
-<TD><%=rsTruck.getInt(7)%></TD>
-<TD><%=rsTruck.getInt(8)%></TD>
+<TD><%=rs.getInt(1)%></TD>
 </TR>
 
 <% } %>
@@ -210,8 +145,6 @@ while (rsTruck.next()) {
 <%
 // close all the connections.
 rs.close();
-rsSuv.close();
-rsTruck.close();
 statement.close();
 conn.close();
 } catch (Exception ex) {

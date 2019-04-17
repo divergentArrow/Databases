@@ -27,7 +27,8 @@ margin:5px;
 padding: 9px;
 }
 th{
-font-size:20px;
+font-size:22px;
+padding: 5px;
 }
 .dropbtn {
   background-color: #3498DB;
@@ -88,7 +89,7 @@ ResultSet rsSuv = null;
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QuerySuv = "SELECT * from Truck order by axles;";
+String QuerySuv = "SELECT * from Suv order by Seats;";
 
 rsSuv = statement.executeQuery(QuerySuv);
 
@@ -96,13 +97,13 @@ rsSuv = statement.executeQuery(QuerySuv);
 <div class="dropdown">
   <button onclick="myFunction()" class="dropbtn">Click To Sort By</button>
   <div id="myDropdown" class="dropdown-content">
-    <a href="">Make</a>
-    <a href="">Model</a>
-    <a href="">Price</a>
-    <a href="">Color</a>
-    <a href="">Posted_Date</a>
-    <a href="">Sold Date</a>
-    <a href="">VIN</a>
+    <a href="SortMake.jsp">Make</a>
+    <a href="SortModel.jsp">Model</a>
+    <a href="SortPrice.jsp">Price</a>
+    <a href="SortColor.jsp">Color</a>
+    <a href="SortPosted.jsp">Posted_Date</a>
+    <a href="DateSold.jsp">Sold Date</a>
+    <a href="SortVIN.jsp">VIN</a>
     <a href="SortCylinders.jsp">Cylinders</a>
     <a href="SortAxles.jsp">Axles</a>
     <a href="SortSeats.jsp">Seats</a>    

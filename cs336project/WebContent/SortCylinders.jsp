@@ -73,7 +73,7 @@ font-size:20px;
 <title>Getting Items!</title>
 </head>
 <body>
-<div align=center><h1 align=center class=box2>Cars!</h1></div>
+<div align=center><h1 align=center class=box2>Vehicles!</h1></div>
 <%
 try {
 

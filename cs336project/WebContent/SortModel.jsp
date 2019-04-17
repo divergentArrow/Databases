@@ -107,6 +107,7 @@ rs = statement.executeQuery(QueryV);
     <a href="SortCylinders.jsp">Cylinders</a>
     <a href="SortAxles.jsp">Axles</a>
     <a href="SortSeats.jsp">Seats</a>    
+    <a href="itemTable.jsp">Vehicle Type</a>    
   </div>
 </div>
 <div align="center">

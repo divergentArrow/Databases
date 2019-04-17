@@ -104,8 +104,8 @@ rs = statement.executeQuery(QueryCar);
     <a href="">Sold Date</a>
     <a href="">VIN</a>
     <a href="SortCylinders.jsp">Cylinders</a>
-    <a href="">Axles</a>
-    <a href="">Seats</a>    
+    <a href="SortAxles.jsp">Axles</a>
+    <a href="SortSeats.jsp">Seats</a>    
   </div>
 </div>
 <div align="center">

@@ -46,6 +46,7 @@
 				<td>Minimum Price</td>
 			</tr>
 		<%
+			System.out.println("cool getting started");
 			Seller seller = new Seller(session);
 			while(seller.rs.next()){
 		%>

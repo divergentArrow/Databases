@@ -81,6 +81,7 @@ align: center;}
 <br>
 <br>
 	<a href='logout.jsp' class=box1>Log out</a>
+	<a href='buyer.jsp' class=box1>Buy</a>
 	</body>
 	</html>
 	<%

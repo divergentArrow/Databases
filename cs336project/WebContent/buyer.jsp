@@ -10,6 +10,12 @@
 </head>
 
 <body>
+	<%
+	User buyer = new User();
+	buyer.setUsername((String)session.getAttribute("user"));
+	System.out.println(buyer.getUsername());
+	%>
+
 	<div>
 	<form action="buyerredirect.jsp" method="post">
 	
@@ -24,18 +30,10 @@
 	  	<%
 		String n = request.getParameter("VIN");
 		System.out.println(n);
-		//int g=Integer.parseInt(n);
-		//System.out.println(g);
-		//String vinS=request.getParameter("VIN");		
-		//int vin = Integer.valueOf(vinS);
 		System.out.print("about to start runner inner code");
 		int count=0;
 	
-
-		
-
-		
-		
+	
 		%>
       <div>
 		<a href='success.jsp' class=box1>Welcome</a><br>

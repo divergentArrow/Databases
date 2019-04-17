@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.mysql.jdbc.PreparedStatement;
 
 
-public class Buyer {
+public class Buyer extends User{
 	public ResultSet rs;
 	public HttpSession session;
 	public ApplicationDB db;
@@ -43,16 +43,8 @@ public class Buyer {
 			updateStud.executeUpdate(); 
 			st.close();
 			updateStud.close();
-			//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
-			//st.setString(1, auctID);
-			//ps.setString(2, newBeer);
-			//ps.setFloat(3, price);
-			//Run the query against the DB
-			//st.executeUpdate();
-
-			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
-			
-
+	
+	
 			
 			
 			

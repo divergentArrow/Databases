@@ -92,12 +92,12 @@ Statement statement = conn.createStatement();
 Statement statement1 = conn.createStatement();
 Statement statement2 = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryCar = "SELECT * FROM Cars;";
-String QueryTruck = "SELECT * FROM Truck;";
-String QuerySuv = "SELECT * FROM Suv;";
+String QueryCar = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,c.VIN,c.Make,c.Model,c.Color,c.Cylinders, a.buyerID,Auction_System.current_bid from Auction a JOIN Cars c ON c.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin;";
+//String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,Auction_System.current_bid from Auction a JOIN Truck s ON t.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin;";
+//String QuerySuv = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,s.VIN,s.Make,s.Model,s.Color,s.Seats, a.buyerID,Auction_System.current_bid from Auction a JOIN Suv s ON s.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin;";
 rs = statement.executeQuery(QueryCar);
-rsSuv = statement1.executeQuery(QuerySuv);
-rsTruck = statement2.executeQuery(QueryTruck);
+//rsSuv = statement1.executeQuery(QuerySuv);
+//rsTruck = statement2.executeQuery(QueryTruck);
 
 %>
 <div class="dropdown">
@@ -119,97 +119,40 @@ rsTruck = statement2.executeQuery(QueryTruck);
 <div align="center">
 <TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
 <TR>
-<th colspan="8">
+<th colspan="11">
 Cars
 </th>
 </TR>
 
 <TR>
+<td>Auction ID</td>
+<td>Start Time</td>
+<td>End Time</td>
+<td>Seller ID</td>
+<td>VIN</td>
 <td>Make</td>
 <td>Model</td>
-<td>Price</td>
 <td>Color</td>
-<td>Date Sold</td>
-<td>Date Posted</td>
-<td>VIN</td>
 <td>Cylinders</td>
+<td>Buyer ID</td>
+<td>Current Bid</td>
 </TR>
 <%
 while (rs.next()) {
 %>
 
 <TR>
-<TD><%=rs.getString(1)%></TD>
-<TD><%=rs.getString(2)%></TD>
-<TD><%=rs.getInt(3)%></TD>
+<TD><%=rs.getInt(1)%></TD>
+<TD><%=rs.getTime(2)%></TD>
+<TD><%=rs.getTime(3)%></TD>
 <TD><%=rs.getString(4)%></TD>
-<TD><%=rs.getDate(5)%></TD>
-<TD><%=rs.getDate(6)%></TD>
-<TD><%=rs.getInt(7)%></TD>
-<TD><%=rs.getInt(8)%></TD>
-</TR>
-
-<% } %>
-<TR>
-<th colspan="8">
-Suvs
-</th>
-</TR>
-<TR>
-<td>Make</td>
-<td>Model</td>
-<td>Price</td>
-<td>Color</td>
-<td>Date Sold</td>
-<td>Date Posted</td>
-<td>VIN</td>
-<td>Seats</td>
-</TR>
-<% 
-while (rsSuv.next()) {
-%>
-
-<TR>
-<TD><%=rsSuv.getString(1)%></TD>
-<TD><%=rsSuv.getString(2)%></TD>
-<TD><%=rsSuv.getInt(3)%></TD>
-<TD><%=rsSuv.getString(4)%></TD>
-<TD><%=rsSuv.getDate(5)%></TD>
-<TD><%=rsSuv.getDate(6)%></TD>
-<TD><%=rsSuv.getInt(7)%></TD>
-<TD><%=rsSuv.getInt(8)%></TD>
-</TR>
-
-<% } %>
-<TR>
-<th colspan="8">
-Trucks
-</th>
-</TR>
-<TR>
-<td>Make</td>
-<td>Model</td>
-<td>Price</td>
-<td>Color</td>
-<td>Date Sold</td>
-<td>Date Posted</td>
-<td>VIN</td>
-<td>Axles</td>
-</TR>
-
-<% 
-while (rsTruck.next()) {
-%>
-
-<TR>
-<TD><%=rsTruck.getString(1)%></TD>
-<TD><%=rsTruck.getString(2)%></TD>
-<TD><%=rsTruck.getInt(3)%></TD>
-<TD><%=rsTruck.getString(4)%></TD>
-<TD><%=rsTruck.getDate(5)%></TD>
-<TD><%=rsTruck.getDate(6)%></TD>
-<TD><%=rsTruck.getInt(7)%></TD>
-<TD><%=rsTruck.getInt(8)%></TD>
+<TD><%=rs.getInt(5)%></TD>
+<TD><%=rs.getString(6)%></TD>
+<TD><%=rs.getString(7)%></TD>
+<TD><%=rs.getString(8)%></TD>
+<TD><%=rs.getInt("Cylinders")%></TD>
+<TD><%=rs.getString(7)%></TD>
+<TD><%=rs.getInt("current_bid")%></TD>
 </TR>
 
 <% } %>
@@ -217,11 +160,11 @@ while (rsTruck.next()) {
 <%
 // close all the connections.
 rs.close();
-rsSuv.close();
-rsTruck.close();
+
+
 statement.close();
 conn.close();
-} catch (Exception ex) {
+}catch (Exception ex) {
 %>
 
 <%

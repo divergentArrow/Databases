@@ -40,6 +40,9 @@ public class User {
 		this.session = session;
 		sesh = session.getAttribute("user").toString();
 		rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "'");
+		if(this.username!=null && this.username.equalsIgnoreCase("admin")) {
+			this.setAdminS(true);
+		}
 	}
 	
 	//getter and setter methods for class Member
@@ -69,16 +72,25 @@ public class User {
 	}
 	
 	public float getSumOfSales() throws Exception{
-		rs = st.executeQuery("SELECT SUM(Price) FROM Vehicle");
+		rs = st.executeQuery("SELECT SUM(Price) FROM Vehicle WHERE Vehicle.Date_sold NOT LIKE '0001-01-01 00:00:00'");
 		boolean hasRows = rs.first();
 		float priceSum;
 		if(hasRows) {
-			priceSum = rs.getFloat(0);
+			priceSum = rs.getFloat(1);
 		} else {
 			priceSum = (float) 0;
 		}
 		return priceSum;
 	}
 	
+	/*
+	 * Assumes "earnings per item" defines a single item as any vehicle with a unique VIN,
+	 * meaning every vehicle on sale or sold is a unique item. Only accounts for items
+	 * that were actually sold
+	 */
+	public ResultSet getEarningsPerItem() throws Exception{
+		return st.executeQuery("SELECT VIN, Price FROM Vehicle");
 	}
+	
+}
 	

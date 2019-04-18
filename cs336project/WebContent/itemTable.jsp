@@ -93,11 +93,11 @@ Statement statement1 = conn.createStatement();
 Statement statement2 = conn.createStatement();
 // sql query to retrieve values from the secified table.
 String QueryCar = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,c.VIN,c.Make,c.Model,c.Color,c.Cylinders, a.buyerID,Auction_System.current_bid from Auction a JOIN Cars c ON c.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin;";
-//String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,Auction_System.current_bid from Auction a JOIN Truck s ON t.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin;";
-//String QuerySuv = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,s.VIN,s.Make,s.Model,s.Color,s.Seats, a.buyerID,Auction_System.current_bid from Auction a JOIN Suv s ON s.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin;";
+String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,Auction_System.current_bid from Auction a JOIN Truck t ON t.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin;";
+String QuerySuv = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,s.VIN,s.Make,s.Model,s.Color,s.Seats, a.buyerID,Auction_System.current_bid from Auction a JOIN Suv s ON s.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin;";
 rs = statement.executeQuery(QueryCar);
-//rsSuv = statement1.executeQuery(QuerySuv);
-//rsTruck = statement2.executeQuery(QueryTruck);
+rsSuv = statement1.executeQuery(QuerySuv);
+rsTruck = statement2.executeQuery(QueryTruck);
 
 %>
 <div class="dropdown">
@@ -156,12 +156,99 @@ while (rs.next()) {
 </TR>
 
 <% } %>
+<br>
+<br>
+<div align="center">
+<TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
+<TR>
+<th colspan="11">
+SUVs
+</th>
+</TR>
 
+<TR>
+<td>Auction ID</td>
+<td>Start Time</td>
+<td>End Time</td>
+<td>Seller ID</td>
+<td>VIN</td>
+<td>Make</td>
+<td>Model</td>
+<td>Color</td>
+<td>Seats</td>
+<td>Buyer ID</td>
+<td>Current Bid</td>
+</TR>
+
+<%
+while (rsSuv.next()) {
+%>
+
+<TR>
+<TD><%=rsSuv.getInt(1)%></TD>
+<TD><%=rsSuv.getTime(2)%></TD>
+<TD><%=rsSuv.getTime(3)%></TD>
+<TD><%=rsSuv.getString(4)%></TD>
+<TD><%=rsSuv.getInt(5)%></TD>
+<TD><%=rsSuv.getString(6)%></TD>
+<TD><%=rsSuv.getString(7)%></TD>
+<TD><%=rsSuv.getString(8)%></TD>
+<TD><%=rsSuv.getInt("Seats")%></TD>
+<TD><%=rsSuv.getString(7)%></TD>
+<TD><%=rsSuv.getInt("current_bid")%></TD>
+</TR>
+
+<% } %>
+<br>
+<br>
+<div align="center">
+<TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
+<TR>
+<th colspan="11">
+Trucks
+</th>
+</TR>
+
+<TR>
+<td>Auction ID</td>
+<td>Start Time</td>
+<td>End Time</td>
+<td>Seller ID</td>
+<td>VIN</td>
+<td>Make</td>
+<td>Model</td>
+<td>Color</td>
+<td>Axles</td>
+<td>Buyer ID</td>
+<td>Current Bid</td>
+</TR>
+
+<%
+while (rsTruck.next()) {
+%>
+
+<TR>
+<TD><%=rsTruck.getInt(1)%></TD>
+<TD><%=rsTruck.getTime(2)%></TD>
+<TD><%=rsTruck.getTime(3)%></TD>
+<TD><%=rsTruck.getString(4)%></TD>
+<TD><%=rsTruck.getInt(5)%></TD>
+<TD><%=rsTruck.getString(6)%></TD>
+<TD><%=rsTruck.getString(7)%></TD>
+<TD><%=rsTruck.getString(8)%></TD>
+<TD><%=rsTruck.getInt("Axles")%></TD>
+<TD><%=rsTruck.getString(7)%></TD>
+<TD><%=rsTruck.getInt("current_bid")%></TD>
+</TR>
+
+<% } %>
+<br>
+<br>
 <%
 // close all the connections.
 rs.close();
-
-
+rsSuv.close();
+rsTruck.close();
 statement.close();
 conn.close();
 }catch (Exception ex) {

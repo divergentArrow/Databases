@@ -89,7 +89,7 @@ ResultSet rsSuv = null;
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QuerySuv = "SELECT * from Suv order by Seats;";
+String QuerySuv = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,s.VIN,s.Make,s.Model,s.Color,s.Seats, a.buyerID,Auction_System.current_bid from Auction a JOIN Suv s ON s.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin group by (Auction_ID) order by Seats;";
 
 rsSuv = statement.executeQuery(QuerySuv);
 
@@ -97,50 +97,57 @@ rsSuv = statement.executeQuery(QuerySuv);
 <div class="dropdown">
   <button onclick="myFunction()" class="dropbtn">Click To Sort By</button>
   <div id="myDropdown" class="dropdown-content">
+    <a href="SortAuctionID.jsp">Auction ID</a>
+    <a href="SortEndTime.jsp">End Time</a>
     <a href="SortMake.jsp">Make</a>
     <a href="SortModel.jsp">Model</a>
-    <a href="SortPrice.jsp">Price</a>
+    <a href="SortPrice.jsp">Current Bid</a>
     <a href="SortColor.jsp">Color</a>
-    <a href="SortPosted.jsp">Posted_Date</a>
-    <a href="DateSold.jsp">Sold Date</a>
     <a href="SortVIN.jsp">VIN</a>
     <a href="SortCylinders.jsp">Cylinders</a>
     <a href="SortAxles.jsp">Axles</a>
-    <a href="SortSeats.jsp">Seats</a> 
-    <a href="itemTable.jsp">Vehicle Type</a>    
+    <a href="SortSeats.jsp">Seats</a>  
+    <a href="itemTable.jsp">Vehicle Type</a>   
   </div>
 </div>
 <div align="center">
 <TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
 <TR>
-<th colspan="8">
+<th colspan="11">
 Suvs
 </th>
 </TR>
 
 <TR>
+<td>Auction ID</td>
+<td>Start Time</td>
+<td>End Time</td>
+<td>Seller ID</td>
+<td>VIN</td>
 <td>Make</td>
 <td>Model</td>
-<td>Price</td>
 <td>Color</td>
-<td>Date Sold</td>
-<td>Date Posted</td>
-<td>VIN</td>
 <td>Seats</td>
+<td>Buyer ID</td>
+<td>Current Bid</td>
 </TR>
+
 <%
 while (rsSuv.next()) {
 %>
 
 <TR>
-<TD><%=rsSuv.getString(1)%></TD>
-<TD><%=rsSuv.getString(2)%></TD>
-<TD><%=rsSuv.getInt(3)%></TD>
+<TD><%=rsSuv.getInt(1)%></TD>
+<TD><%=rsSuv.getDate(2)%> <%=rsSuv.getTime(2)%></TD>
+<TD><%=rsSuv.getDate(3)%> <%=rsSuv.getTime(3)%></TD>
 <TD><%=rsSuv.getString(4)%></TD>
-<TD><%=rsSuv.getDate(5)%></TD>
-<TD><%=rsSuv.getDate(6)%></TD>
-<TD><%=rsSuv.getInt(7)%></TD>
-<TD><%=rsSuv.getInt(8)%></TD>
+<TD><%=rsSuv.getInt(5)%></TD>
+<TD><%=rsSuv.getString(6)%></TD>
+<TD><%=rsSuv.getString(7)%></TD>
+<TD><%=rsSuv.getString(8)%></TD>
+<TD><%=rsSuv.getInt("Seats")%></TD>
+<TD><%=rsSuv.getString(7)%></TD>
+<TD><%=rsSuv.getInt("current_bid")%></TD>
 </TR>
 
 <% } %>
@@ -164,6 +171,7 @@ out.println("Can't connect to database.");
 <div align=center>
 <FORM ACTION="success.jsp" method="get" >
 <button type="submit"><-- Main Menu</button>
+</FORM>
 </div>
 <script>
 /* When the user clicks on the button, 

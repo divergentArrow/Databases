@@ -32,8 +32,8 @@ padding: 5px;
 }
 .dropbtn {
   background-color: #3498DB;
-  color: black;
-  padding: 12px;
+  color: white;
+  padding: 16px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -60,7 +60,7 @@ padding: 5px;
 
 .dropdown-content a {
   color: black;
-  padding: 10px 14px;
+  padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
@@ -83,21 +83,15 @@ Connection conn = db.getConnection();
 
 //declare a resultset that uses as a table for output data from tha table.
 ResultSet rs = null;
-ResultSet rsSuv=null;
-ResultSet rsTruck=null;
+
 
 /* createStatement() is used for create statement object that is used for 
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
-Statement statement1 = conn.createStatement();
-Statement statement2 = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryCar = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,c.VIN,c.Make,c.Model,c.Color,c.Cylinders, a.buyerID,Auction_System.current_bid from Auction a JOIN Cars c ON c.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin group by (Auction_ID);";
-String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,Auction_System.current_bid from Auction a JOIN Truck t ON t.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin group by (Auction_ID);";
-String QuerySuv = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,s.VIN,s.Make,s.Model,s.Color,s.Seats, a.buyerID,Auction_System.current_bid from Auction a JOIN Suv s ON s.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin group by (Auction_ID);";
-rs = statement.executeQuery(QueryCar);
-rsSuv = statement1.executeQuery(QuerySuv);
-rsTruck = statement2.executeQuery(QueryTruck);
+String QueryV = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,v.VIN,v.Make,v.Model,v.Color,a.buyerID,Auction_System.current_bid from Auction a JOIN Vehicle v ON v.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin  group by (Auction_ID) order by Auction_ID;";
+
+rs = statement.executeQuery(QueryV);
 
 %>
 <div class="dropdown">
@@ -113,14 +107,14 @@ rsTruck = statement2.executeQuery(QueryTruck);
     <a href="SortCylinders.jsp">Cylinders</a>
     <a href="SortAxles.jsp">Axles</a>
     <a href="SortSeats.jsp">Seats</a>  
-    <a href="itemTable.jsp">Vehicle Type</a>   
+    <a href="itemTable.jsp">Vehicle Type</a>  
   </div>
 </div>
 <div align="center">
 <TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
 <TR>
-<th colspan="11">
-Cars
+<th colspan="10">
+Vehicles
 </th>
 </TR>
 
@@ -133,7 +127,6 @@ Cars
 <td>Make</td>
 <td>Model</td>
 <td>Color</td>
-<td>Cylinders</td>
 <td>Buyer ID</td>
 <td>Current Bid</td>
 </TR>
@@ -150,114 +143,27 @@ while (rs.next()) {
 <TD><%=rs.getString(6)%></TD>
 <TD><%=rs.getString(7)%></TD>
 <TD><%=rs.getString(8)%></TD>
-<TD><%=rs.getInt("Cylinders")%></TD>
-<TD><%=rs.getString(7)%></TD>
+<TD><%=rs.getString(9)%></TD>
 <TD><%=rs.getInt("current_bid")%></TD>
 </TR>
-<% } %>
-</TABLE>
-</div>
-<br>
-<div align="center">
-<TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
-<TR>
-<th colspan="11">
-SUVs
-</th>
-</TR>
-
-<TR>
-<td>Auction ID</td>
-<td>Start Time</td>
-<td>End Time</td>
-<td>Seller ID</td>
-<td>VIN</td>
-<td>Make</td>
-<td>Model</td>
-<td>Color</td>
-<td>Seats</td>
-<td>Buyer ID</td>
-<td>Current Bid</td>
-</TR>
-
-<%
-while (rsSuv.next()) {
-%>
-
-<TR>
-<TD><%=rsSuv.getInt(1)%></TD>
-<TD><%=rsSuv.getTime(2)%></TD>
-<TD><%=rsSuv.getTime(3)%></TD>
-<TD><%=rsSuv.getString(4)%></TD>
-<TD><%=rsSuv.getInt(5)%></TD>
-<TD><%=rsSuv.getString(6)%></TD>
-<TD><%=rsSuv.getString(7)%></TD>
-<TD><%=rsSuv.getString(8)%></TD>
-<TD><%=rsSuv.getInt("Seats")%></TD>
-<TD><%=rsSuv.getString(7)%></TD>
-<TD><%=rsSuv.getInt("current_bid")%></TD>
-</TR>
 
 <% } %>
-</TABLE>
-</div>
-<br>
-<div align="center">
-<TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
-<TR>
-<th colspan="11">
-Trucks
-</th>
-</TR>
 
-<TR>
-<td>Auction ID</td>
-<td>Start Time</td>
-<td>End Time</td>
-<td>Seller ID</td>
-<td>VIN</td>
-<td>Make</td>
-<td>Model</td>
-<td>Color</td>
-<td>Axles</td>
-<td>Buyer ID</td>
-<td>Current Bid</td>
-</TR>
-
-<%
-while (rsTruck.next()) {
-%>
-
-<TR>
-<TD><%=rsTruck.getInt(1)%></TD>
-<TD><%=rsTruck.getTime(2)%></TD>
-<TD><%=rsTruck.getTime(3)%></TD>
-<TD><%=rsTruck.getString(4)%></TD>
-<TD><%=rsTruck.getInt(5)%></TD>
-<TD><%=rsTruck.getString(6)%></TD>
-<TD><%=rsTruck.getString(7)%></TD>
-<TD><%=rsTruck.getString(8)%></TD>
-<TD><%=rsTruck.getInt("Axles")%></TD>
-<TD><%=rsTruck.getString(7)%></TD>
-<TD><%=rsTruck.getInt("current_bid")%></TD>
-</TR>
-
-<% } %>
-</TABLE>
-</div>
 <%
 // close all the connections.
 rs.close();
-rsSuv.close();
-rsTruck.close();
 statement.close();
 conn.close();
-}catch (Exception ex) {
+} catch (Exception ex) {
 %>
 
 <%
+out.println("Can't connect to database.");
 }
 %>
+</TABLE>
+</div>
+<br>
 <br>
 <div align=center>
 <FORM ACTION="success.jsp" method="get" >

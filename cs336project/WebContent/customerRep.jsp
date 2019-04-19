@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="cs336project.*" %>
-
 <!DOCTYPE html>
 <html class="bg">
 <style>
@@ -59,35 +58,23 @@ padding: 5px;
 </style>
 <head>
 <meta charset="ISO-8859-1">
-<title>Sales Reports</title>
+<title>Customer Representative</title>
 </head>
 <body>
-	
-	<span>Total earnings: 
-	<%
-		User admin = new User(session);
-		float totalSales = admin.getSumOfSales();
-		String formattedSales = String.format("%.02f", totalSales);
-	%>
-	$<%=formattedSales %>
-	</span>
-	<br>
-	<br>
-	<span>View best-selling items</span>
-	<form action="bestSellingItems.jsp" method="post">
-		Maximum number of items to display: <input type="text" id="maxResults" name="maxResults" placeholder="10"><br>
-		<button type="submit" name="button" value="getBestSellers">Get Best-selling Items</button><br>
-	</form>
-	<br>
-	<br>
-	<a href="earningsPerItem.jsp" class=box1>View earnings per item</a><br>
-	<br>
-	<a href="earningsPerItemType.jsp" class=box1>View earnings per item type</a>
-	<br>
-	<a href="earningsPerSeller.jsp" class=box1>View earnings per seller</a>
+<span>Customer Actions</span> <br>
+<%
+	CustomerRepresentative cr = new CustomerRepresentative(session);
+%>
+<span>Placeholder text for access to forum page</span><br>
+<form action="editAccounts.jsp" method="post">
+Username of account to edit: <input type="text" id="username" name="username" placeholder="bko9@rutgers.edu"><br>
+New Password: <input type="text" id="password" name="password" placeholder="password"><br>
+New Maximum Bid: <input type="text" id="maxBid" name="maxBid" placeholder="100000.00"><br>
+<button type="submit" name="button" value="editUser">Edit User</button><br>
+</form>
 
-	<br><br>
-	<a href="admin.jsp" class=box1>Return to Admin page</a>
-	
+
+<a href='success.jsp' class=box1>Home</a><br>
+<a href='logout.jsp' class=box1>Log out</a>
 </body>
 </html>

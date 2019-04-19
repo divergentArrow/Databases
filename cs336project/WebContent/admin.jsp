@@ -30,6 +30,7 @@ form{
 	border: 2px solid black;
 	background-color: Brown;
 	color: white;
+	width: 50%;
 }
 input{
 	background-color: #FE6301;

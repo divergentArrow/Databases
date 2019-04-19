@@ -141,6 +141,15 @@ public class User {
 		return rs;
 	}
 	
+	public ResultSet getBestSellingItems(int n) throws Exception{
+		String query = "SELECT Auction.vin, Make, Model, Color, finalBid " + 
+				"FROM Auction JOIN Vehicle ON Auction.vin=Vehicle.VIN " + 
+				"ORDER BY finalBid DESC " + 
+				"LIMIT " + n;
+		rs = st.executeQuery(query);
+		return rs;
+	}
+	
 	public boolean updateAuctions(){
 		boolean isUpdated = false;
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -199,6 +208,28 @@ public class User {
 		}
 		
 		return isUpdated;
+	}
+	
+	public boolean isCR(String password) {
+		boolean cr = false;
+		if(this.isCrep) {
+			return true;
+		} else {
+			String user = this.username;
+			if(user.charAt(0) == 'c' && user.charAt(1) == 'r'){
+				try{
+					Integer.parseInt(user.substring(2));
+					if(password.equalsIgnoreCase(user)) {
+						return true;
+					} else {
+						return false;
+					}
+				} catch(NumberFormatException e){
+					return false;
+				}
+			}
+		}
+		return cr;
 	}
 	
 }

@@ -13,18 +13,21 @@
 	<%
 		User admin = new User(session);
 		try{
-			admin.rs = admin.getEarningsPerItem();
+			admin.rs = admin.getEarningsPerSeller();
 	%>
-
+	Any users not included in this table are not sellers and therefore have no earnings.
+	However, if you would like to view a table including the earnings of ALL end users, click the link below.<br><br>
+	<a href="earningsPerEndUser.jsp" class=box1>See earnings of ALL end users</a><br><br>
+	
 	<TABLE border="1"
 		style="background-color: Brown; align: center; color: Cornsilk">
 		<TR>
-			<th colspan="2">Earnings per Item</th>
+			<th colspan="2">Earnings per Seller</th>
 		</TR>
 
 		<TR>
-			<td>VIN</td>
-			<td>Earnings</td>
+			<td>Seller</td>
+			<td>Total Earnings</td>
 		</TR>
 		<%
 			while (admin.rs.next()) {
@@ -33,15 +36,15 @@
 		%>
 
 		<TR>
-			<TD><%=admin.rs.getInt(1)%></TD>
-			<TD>$<%=formattedSales %></TD>
+			<TD><%=admin.rs.getString(1)%></TD>
+			<TD><%=formattedSales%></TD>
 		</TR>
 
-		<% }
+		<%	}
 		} catch(Exception e){
 		%>
 		<TR>
-			<TD>NO SOLD ITEMS EXIST YET</TD>
+			<TD>NO SELLERS EXIST YET</TD>
 			<TD>0</TD>
 		</TR>
 		<%

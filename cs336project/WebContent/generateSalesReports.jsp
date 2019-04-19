@@ -20,6 +20,11 @@
 	<br>
 	<br>
 	<a href="earningsPerItem.jsp" class=box1>View earnings per item</a><br>
+	<br>
+	<a href="earningsPerItemType.jsp" class=box1>View earnings per item type</a>
+	<br>
+	<a href="earningsPerSeller.jsp" class=box1>View earnings per seller</a>
+	<br><br>
 	<a href="admin.jsp" class=box1>Return to Admin page</a>
 	
 </body>

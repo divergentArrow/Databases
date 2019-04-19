@@ -49,6 +49,20 @@ th{
 font-size:22px;
 padding: 5px;
 }
+::-webkit-input-placeholder { /* Chrome */
+  color: #B0AEAE;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #B0AEAE;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #B0AEAE;
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: #B0AEAE;
+  opacity: 1;
+}
 .show {display: block;}
 </style>
 <head>

@@ -55,6 +55,20 @@ th{
 font-size:22px;
 padding: 5px;
 }
+::-webkit-input-placeholder { /* Chrome */
+  color: #B0AEAE;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #B0AEAE;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #B0AEAE;
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: #B0AEAE;
+  opacity: 1;
+}
 .show {display: block;}
 </style>
 <head>
@@ -77,6 +91,13 @@ padding: 5px;
 	<form action="bestSellingItems.jsp" method="post">
 		Maximum number of items to display: <input type="text" id="maxResults" name="maxResults" placeholder="10"><br>
 		<button type="submit" name="button" value="getBestSellers">Get Best-selling Items</button><br>
+	</form>
+	<br>
+	<br>
+	<span>View Best Buyers</span>
+	<form action="bestBuyers.jsp" method="post">
+		Maximum number of buyers to display: <input type="text" id="maxBuyers" name="maxBuyers" placeholder="10"><br>
+		<button type="submit" name="button" value="getBestBuyers">Get Best Buyers</button><br>
 	</form>
 	<br>
 	<br>

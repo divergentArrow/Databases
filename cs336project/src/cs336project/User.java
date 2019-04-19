@@ -150,6 +150,17 @@ public class User {
 		return rs;
 	}
 	
+	public ResultSet getBestBuyers(int n) throws Exception{
+		String query = "SELECT winner, SUM(finalBid) AS totalBid\r\n" + 
+				"FROM Auction\r\n" + 
+				"WHERE winner NOT LIKE \"none\"\r\n" + 
+				"GROUP BY winner\r\n" + 
+				"ORDER BY totalBid DESC\r\n" + 
+				"LIMIT " + n;
+		rs = st.executeQuery(query);
+		return rs;
+	}
+	
 	public boolean updateAuctions(){
 		boolean isUpdated = false;
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

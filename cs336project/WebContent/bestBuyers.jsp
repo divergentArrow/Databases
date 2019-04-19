@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="cs336project.*" %>
+    
 <!DOCTYPE html>
 <html class="bg">
 <style>
@@ -72,23 +73,55 @@ padding: 5px;
 </style>
 <head>
 <meta charset="ISO-8859-1">
-<title>Customer Representative</title>
+<title>Best-selling Vehicles</title>
 </head>
 <body>
-<span>Customer Actions</span> <br>
-<%
-	CustomerRepresentative cr = new CustomerRepresentative(session);
-%>
-<span>Placeholder text for access to forum page</span><br>
-<form action="editAccounts.jsp" method="post">
-Username of account to edit: <input type="text" id="username" name="username" placeholder="bko9@rutgers.edu"><br>
-New Password: <input type="text" id="password" name="password" placeholder="password"><br>
-New Maximum Bid: <input type="text" id="maxBid" name="maxBid" placeholder="100000.00"><br>
-<button type="submit" name="button" value="editUser">Edit User</button><br>
-</form>
+	
+	<%
+		User admin = new User(session);
+		String maxBuyers = request.getParameter("maxBuyers");
+		try{
+			int maxResults = Integer.parseInt(maxBuyers);
+			admin.rs = admin.getBestBuyers(maxResults);
+	%>
+	
+	<TABLE border="1"
+		style="background-color: Brown; align: center; color: Cornsilk">
+		<TR>
+			<th colspan="2">Best Buyers</th>
+		</TR>
+
+		<TR>
+			<td>Buyer ID</td>
+			<td>Total Spent</td>
+		</TR>
+		<%
+			while (admin.rs.next()) {
+				String buyerID = admin.rs.getString(1);
+				float totalBid = admin.rs.getFloat(2);
+				String formattedTotal = String.format("%.02f", totalBid);
+		%>
+
+		<TR>
+			<TD><%=buyerID%></TD>
+			<TD>$<%=formattedTotal%></TD>
+		</TR>
+
+		<% 	}
+		} catch(Exception e){
+		%>
+			<TR>
+				<TD>NO ITEMS HAVE BEEN BOUGHT YET</TD>
+				<TD>0</TD>
+			</TR>
+		<%}%>
+	</TABLE>
 
 
-<a href='success.jsp' class=box1>Home</a><br>
-<a href='logout.jsp' class=box1>Log out</a>
+	<br>
+	<br>
+	
+	<a href="generateSalesReports.jsp" class=box1>Return to Sales Reports page</a><br>
+	<a href="admin.jsp" class=box1>Return to Admin page</a>
 </body>
 </html>

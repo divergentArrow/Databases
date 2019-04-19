@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*, cs336project.*"%>
 <!DOCTYPE html>
 <html class="bg">
 <head>
@@ -86,5 +86,6 @@ align: center;}
 	</body>
 	</html>
 	<%
+	User user = new User(session);
 	}
 	%>

@@ -3,7 +3,11 @@ package cs336project;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,9 +33,7 @@ public class User {
 		
 		isCrep = isRep;
 		isAdmin = isAdm;
-	}
-
-	public User(){
+		updateAuctions();
 	}
 	
 	public User(HttpSession session) throws Exception{
@@ -40,6 +42,7 @@ public class User {
 		st = conn.createStatement();
 		this.session = session;
 		sesh = session.getAttribute("user").toString();
+		updateAuctions();
 		rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "'");
 		if(this.username!=null && this.username.equalsIgnoreCase("admin")) {
 			this.setAdminS(true);
@@ -137,6 +140,64 @@ public class User {
 				"	WHERE winner NOT LIKE \"TBD\"\r\n" + 
 				"	GROUP BY winner)");
 		return rs;
+	}
+	
+	public boolean updateAuctions(){
+		boolean isUpdated = false;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date dateTime = new Date();
+		long time = dateTime.getTime();
+		Timestamp ts = new Timestamp(time);
+		String now = dateFormat.format(dateTime);
+		
+		try {
+			rs = st.executeQuery("SELECT * FROM Auction WHERE '" + now + "' >= Auction.end_time");
+			while(rs.next()) {
+				String winner = rs.getString(1);
+				//Timestamp startTime = rs.getTimestamp(2);
+				int auctionId = rs.getInt(3);
+				//String seller = rs.getString(4);
+				String buyer = rs.getString(5);
+				//int vin = rs.getInt(6);
+				Timestamp endTime = rs.getTimestamp(7);
+				float minPrice = rs.getFloat(8);
+				float finalBid = rs.getFloat(9);
+				int updatedRow = 0;
+				int updatedBuyer = 0;
+				
+				ResultSet rsTemp = st.executeQuery("SELECT Auction_ID, sellerID, buyerID, MAX(current_bid) FROM Bid_History WHERE Auction_Id=" + auctionId);
+				rsTemp.first();
+				String currentTopBuyer = rsTemp.getString(3);
+				float maxBid = rsTemp.getFloat(4);
+				
+				if(endTime.compareTo(ts) <= 0) {
+					if(winner.equalsIgnoreCase("TBD")) {
+						winner = buyer;
+						finalBid = maxBid;
+						if(finalBid >= minPrice) {
+							updatedRow = st.executeUpdate("UPDATE Auction SET winner=buyerID, end_time='" + endTime + "', finalBid=" + finalBid + " WHERE Auction_ID=" + auctionId);
+							if(updatedRow == 0) {
+								System.out.println("Failed to update Auction with Auction_ID " + auctionId);
+							}
+						} else {
+							updatedRow = st.executeUpdate("UPDATE Auction SET winner='none', end_time='" + endTime + "', finalBid=" + 0 + " WHERE Auction_ID=" + auctionId);
+						}
+					}
+				}
+				
+				if(!buyer.equalsIgnoreCase(currentTopBuyer)) {
+					updatedBuyer = st.executeUpdate("UPDATE Auction SET buyerID='" + currentTopBuyer + "' WHERE Auction_ID=" + auctionId);
+					if(updatedBuyer == 0) {
+						System.out.println("Failed to update Auction with Auction_ID " + auctionId);
+					}
+				}
+			}
+		} catch(Exception e) {
+			System.out.println("Exception caught while trying to update auctions");
+			return false;
+		}
+		
+		return isUpdated;
 	}
 	
 }

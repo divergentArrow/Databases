@@ -62,4 +62,15 @@ public class CustomerRepresentative {
 		}
 		return isAdded;
 	}
+	
+	public boolean editUser(String user, String pass, float maxBid) throws Exception{
+		String query = "UPDATE User SET Pass = '" + pass + "', Max_bid =" + maxBid + " WHERE Username_Email ='" + user + "'";
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

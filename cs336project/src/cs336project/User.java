@@ -201,5 +201,27 @@ public class User {
 		return isUpdated;
 	}
 	
+	public boolean isCR(String password) {
+		boolean cr = false;
+		if(this.isCrep) {
+			return true;
+		} else {
+			String user = this.username;
+			if(user.charAt(0) == 'c' && user.charAt(1) == 'r'){
+				try{
+					Integer.parseInt(user.substring(2));
+					if(password.equalsIgnoreCase(user)) {
+						return true;
+					} else {
+						return false;
+					}
+				} catch(NumberFormatException e){
+					return false;
+				}
+			}
+		}
+		return cr;
+	}
+	
 }
 	

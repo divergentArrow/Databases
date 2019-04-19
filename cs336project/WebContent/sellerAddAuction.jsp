@@ -65,7 +65,7 @@ padding: 5px;
 			String color = request.getParameter("color");
 			String make = request.getParameter("make");
 			String model = request.getParameter("model");
-			String vehicle = request.getParameter("vehicles")
+			String vehicle = request.getParameter("vehicles");
 			if(vehicle.equals("truck")){
 				
 			}

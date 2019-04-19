@@ -36,6 +36,21 @@ input{
 	background-color: #FE6301;
 	color: white;
 }
+::-webkit-input-placeholder { /* Chrome */
+  color: #B0AEAE;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #B0AEAE;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #B0AEAE;
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: #B0AEAE;
+  opacity: 1;
+}
+
 span{
 	border: 2px solid black;
 	background-color: Brown;

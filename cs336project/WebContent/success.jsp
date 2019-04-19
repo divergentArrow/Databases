@@ -87,6 +87,5 @@ align: center;}
 	</html>
 	<%
 	User user = new User(session);
-	user.updateAuctions();
 	}
 	%>

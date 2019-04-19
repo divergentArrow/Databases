@@ -6,7 +6,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -151,7 +150,8 @@ public class User {
 		String now = dateFormat.format(dateTime);
 		
 		try {
-			rs = st.executeQuery("SELECT * FROM Auction WHERE '" + now + "' >= Auction.end_time");
+			String query = "SELECT * FROM Auction WHERE '" + now + "' >= Auction.end_time";
+			rs = st.executeQuery(query);
 			while(rs.next()) {
 				String winner = rs.getString(1);
 				//Timestamp startTime = rs.getTimestamp(2);
@@ -193,7 +193,8 @@ public class User {
 				}
 			}
 		} catch(Exception e) {
-			System.out.println("Exception caught while trying to update auctions");
+			e.printStackTrace();
+			System.out.println("Either reached end of ResultSet or exception was caught while trying to update auctions");
 			return false;
 		}
 		

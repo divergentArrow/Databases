@@ -31,6 +31,7 @@ form{
 	border: 2px solid black;
 	background-color: Brown;
 	color: white;
+	width: 50%;
 }
 input{
 	background-color: #FE6301;
@@ -72,11 +73,19 @@ padding: 5px;
 	</span>
 	<br>
 	<br>
+	<span>View best-selling items</span>
+	<form action="bestSellingItems.jsp" method="post">
+		Maximum number of items to display: <input type="text" id="maxResults" name="maxResults" placeholder="10"><br>
+		<button type="submit" name="button" value="getBestSellers">Get Best-selling Items</button><br>
+	</form>
+	<br>
+	<br>
 	<a href="earningsPerItem.jsp" class=box1>View earnings per item</a><br>
 	<br>
 	<a href="earningsPerItemType.jsp" class=box1>View earnings per item type</a>
 	<br>
 	<a href="earningsPerSeller.jsp" class=box1>View earnings per seller</a>
+
 	<br><br>
 	<a href="admin.jsp" class=box1>Return to Admin page</a>
 	

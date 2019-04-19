@@ -2,7 +2,54 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="cs336project.*" %>
 <!DOCTYPE html>
-<html>
+<html class="bg">
+<style>
+.bg{
+	background-image: url("https://i.imgur.com/Qbv02Bu.jpg?");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+}
+.box2{
+  padding: 4px 4px;
+  margin-bottom: 7px;
+  margin-top: 7px; 
+  background-color: Brown;
+  color: Cornsilk ;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 20%;
+  align: center;
+}
+table{
+	border: 2px solid black;
+	background-color: Brown;
+	color: white;
+}
+form{
+	border: 2px solid black;
+	background-color: Brown;
+	color: white;
+}
+input{
+	background-color: #FE6301;
+	color: white;
+}
+div span{
+	border: 2px solid black;
+	background-color: Brown;
+	color: white;
+}
+td{
+margin:5px;
+padding: 9px;
+}
+th{
+font-size:22px;
+padding: 5px;
+}
+.show {display: block;}
+</style>
 
 <head>
 <meta charset="ISO-8859-1">
@@ -10,8 +57,8 @@
 </head>
 
 <body>
-	<div>
-		Modify item characteristics or add an auction
+	<div id=page>
+		<span>Modify item characteristics or add an auction</span>
 		<br></br>
 		<form action="sellerModify.jsp" method="post">
 		VIN: <input type="text" id="vin" name="vin" placeholder="123456789"><br>
@@ -29,9 +76,9 @@
 		<button type="submit" name="button" value="addAuction">Add Auction</button><br>
 		</form>
 	</div>
-	<div>
+	<div id=auctionTable>
 		<br></br>
-		My Auctions
+		<span>My Auctions</span>
 		<br></br>
 		
 		<table border="2">

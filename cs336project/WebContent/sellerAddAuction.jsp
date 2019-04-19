@@ -14,11 +14,24 @@
 			String sdt = request.getParameter("sdt");
 			String cdt = request.getParameter("cdt");
 			String minPrice = request.getParameter("minPrice");
+			String color = request.getParameter("color");
+			String make = request.getParameter("make");
+			String model = request.getParameter("model");
+			String vehicle = request.getParameter("vehicles")
+			if(vehicle.equals("truck")){
+				
+			}
+			else if(vehicle.equals("cars")){
+				
+			}
+			else if(vehicle.equals("suv")){
+				
+			}
 			boolean success = false;
 			try{
-				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()){
+				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty()){
 					if(minPrice.isEmpty()){
-						success = seller.addAuction(vin, sdt, cdt);
+						success = seller.addAuction(vin, sdt, cdt,color,make,model);
 					} else{
 						success = seller.addAuction(vin, sdt, cdt, minPrice);
 					}

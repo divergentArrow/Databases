@@ -92,9 +92,9 @@ Statement statement = conn.createStatement();
 Statement statement1 = conn.createStatement();
 Statement statement2 = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryCar = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,c.VIN,c.Make,c.Model,c.Color,c.Cylinders, a.buyerID,Auction_System.current_bid from Auction a JOIN Cars c ON c.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin group by (Auction_ID);";
-String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,Auction_System.current_bid from Auction a JOIN Truck t ON t.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin group by (Auction_ID);";
-String QuerySuv = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,s.VIN,s.Make,s.Model,s.Color,s.Seats, a.buyerID,Auction_System.current_bid from Auction a JOIN Suv s ON s.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin group by (Auction_ID);";
+String QueryCar = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,c.VIN,c.Make,c.Model,c.Color,c.Cylinders, a.buyerID,Bid_History.current_bid from Auction a JOIN Cars c ON c.VIN=a.vin JOIN Bid_History ON Bid_History.Auction_ID=a.Auction_ID group by (Auction_ID);";
+String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,Bid_History.current_bid from Auction a JOIN Truck t ON t.VIN=a.vin JOIN Bid_History ON Bid_History.Auction_ID=a.Auction_ID group by (Auction_ID);";
+String QuerySuv = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,s.VIN,s.Make,s.Model,s.Color,s.Seats, a.buyerID,Bid_History.current_bid from Auction a JOIN Suv s ON s.VIN=a.vin JOIN Bid_History ON Bid_History.Auction_ID=a.Auction_ID group by (Auction_ID);";
 rs = statement.executeQuery(QueryCar);
 rsSuv = statement1.executeQuery(QuerySuv);
 rsTruck = statement2.executeQuery(QueryTruck);

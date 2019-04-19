@@ -89,7 +89,7 @@ ResultSet rsTruck = null;
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,Auction_System.current_bid from Auction a JOIN Truck t ON t.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin group by (Auction_ID) order by axles;";
+String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,Bid_History.current_bid from Auction a JOIN Truck t ON t.VIN=a.vin JOIN Bid_History ON Bid_History.Auction_ID=a.Auction_ID group by (Auction_ID) order by axles;";
 
 rsTruck = statement.executeQuery(QueryTruck);
 

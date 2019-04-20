@@ -73,4 +73,37 @@ public class CustomerRepresentative {
 			return true;
 		}
 	}
+	
+	public boolean editBHAuctionID(String bidID, String auctionID) throws Exception{
+		String query = "UPDATE Bid_History SET Auction_ID=" + auctionID + " WHERE bidID=" + bidID;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editBHSellerID(String bidID, String sellerID) throws Exception{
+		String query = "UPDATE Bid_History SET sellerID='" + sellerID + "' WHERE bidID=" + bidID;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editBHBuyerID(String bidID, String buyerID) throws Exception{
+		String query = "UPDATE Bid_History SET buyerID='" + buyerID + "' WHERE bidID=" + bidID;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

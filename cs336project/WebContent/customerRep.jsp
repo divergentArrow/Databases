@@ -79,13 +79,28 @@ padding: 5px;
 <%
 	CustomerRepresentative cr = new CustomerRepresentative(session);
 %>
-<span>Placeholder text for access to forum page</span><br>
+<span>Placeholder text for access to forum page</span>
+
+<br><br>
+
+<span>Edit a User Account</span><br>
 <form action="editAccounts.jsp" method="post">
 Username of account to edit: <input type="text" id="username" name="username" placeholder="bko9@rutgers.edu"><br>
 New Password: <input type="text" id="password" name="password" placeholder="password"><br>
 New Maximum Bid: <input type="text" id="maxBid" name="maxBid" placeholder="100000.00"><br>
 <button type="submit" name="button" value="editUser">Edit User</button><br>
 </form>
+
+<br><br>
+<span>Edit a Bid</span><br>
+<form action="editBids.jsp" method="post">
+Bid ID: <input type="text" id="bidID" name="bidID" placeholder="1"><br>
+New Auction ID: <input type="text" id="auctionID" name="auctionID" placeholder="1949"><br>
+New Seller: <input type="text" id="sellerID" name="sellerID" placeholder="Seller Username"><br>
+New Buyer: <input type="text" id="buyerID" name="buyerID" placeholder="Buyer Username"><br>
+<button type="submit" name="button" value="editUser">Edit Bid</button><br>
+</form>
+
 
 
 <a href='success.jsp' class=box1>Home</a><br>

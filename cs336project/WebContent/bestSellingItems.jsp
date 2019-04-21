@@ -106,8 +106,8 @@ padding: 5px;
 		} catch(Exception e){
 		%>
 			<TR>
-				<TD>NO SOLD ITEMS EXIST YET</TD>
-				<TD>0</TD>
+				<TD><span>Either the value entered was not greater than 0 or no sold items exist yet.</span></TD>
+				<TD></TD>
 			</TR>
 		<%}%>
 	</TABLE>

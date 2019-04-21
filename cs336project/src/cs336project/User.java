@@ -124,9 +124,9 @@ public class User {
 	
 	public ResultSet getEarningsPerSeller() throws Exception{
 		rs = st.executeQuery("SELECT sellerID, SUM(finalBid)\r\n" + 
-				"FROM (Seller JOIN Auction ON Seller.SUsername_Email LIKE Auction.sellerID)\r\n" + 
+				"FROM Auction\r\n" + 
 				"WHERE winner NOT LIKE \"TBD\"\r\n" + 
-				"GROUP BY winner");
+				"GROUP BY sellerID");
 		return rs;
 	}
 	
@@ -137,7 +137,7 @@ public class User {
 				"	SELECT sellerID\r\n" + 
 				"	FROM (Seller JOIN Auction ON Seller.SUsername_Email LIKE Auction.sellerID)\r\n" + 
 				"	WHERE winner NOT LIKE \"TBD\"\r\n" + 
-				"	GROUP BY winner)");
+				"	GROUP BY sellerID)");
 		return rs;
 	}
 	

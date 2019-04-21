@@ -38,7 +38,7 @@ public class CustomerRepresentative {
 		boolean isAdded = false;
 		try {
 			//First try to add user and pass to User table
-			String query = "INSERT INTO User VALUES ('" + user + "', '" + pass + "')";
+			String query = "INSERT INTO User VALUES ('" + user + "', '" + pass + "', 0.00)";
 			int addUserQuery = st.executeUpdate(query);
 			if(addUserQuery == 0) {
 				System.out.println("Insert into User returned nothing");
@@ -98,6 +98,17 @@ public class CustomerRepresentative {
 	
 	public boolean editBHBuyerID(String bidID, String buyerID) throws Exception{
 		String query = "UPDATE Bid_History SET buyerID='" + buyerID + "' WHERE bidID=" + bidID;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editBHCurrentBid(String bidID, float currentBid) throws Exception{
+		String query = "UPDATE Bid_History SET current_bid=" + currentBid + " WHERE bidID=" + bidID;
 		int updated = st.executeUpdate(query);
 		if(updated == 0) {
 			System.out.println("Error with UPDATE query");

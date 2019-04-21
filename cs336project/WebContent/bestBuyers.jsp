@@ -111,8 +111,8 @@ padding: 5px;
 		} catch(Exception e){
 		%>
 			<TR>
-				<TD>NO ITEMS HAVE BEEN BOUGHT YET</TD>
-				<TD>0</TD>
+				<TD><span>Either the value entered was not than 0 or no items have been bought yet</span></TD>
+				<TD></TD>
 			</TR>
 		<%}%>
 	</TABLE>

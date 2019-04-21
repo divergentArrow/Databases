@@ -98,6 +98,7 @@ Bid ID: <input type="text" id="bidID" name="bidID" placeholder="1"><br>
 New Auction ID: <input type="text" id="auctionID" name="auctionID" placeholder="1949"><br>
 New Seller: <input type="text" id="sellerID" name="sellerID" placeholder="Seller Username"><br>
 New Buyer: <input type="text" id="buyerID" name="buyerID" placeholder="Buyer Username"><br>
+New Current Bid: <input type="text" id="currentBid" name="currentBid" placeholder="20000.00"><br>
 <button type="submit" name="button" value="editUser">Edit Bid</button><br>
 </form>
 

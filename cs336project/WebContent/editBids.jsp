@@ -67,9 +67,12 @@ padding: 5px;
 	String auctionID = request.getParameter("auctionID");
 	String sellerID = request.getParameter("sellerID");
 	String buyerID = request.getParameter("buyerID");
+	String bidAmt = request.getParameter("currentBid");
+	
 	
 	int bidIDInt;
 	int auctionIDInt;
+	float bidFloat;
 
 	if(bidID.isEmpty()){
 		%>
@@ -77,7 +80,7 @@ padding: 5px;
 		<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>
 		<%
 		return;
-	}if(auctionID.isEmpty() && sellerID.isEmpty() && buyerID.isEmpty()){
+	}if(auctionID.isEmpty() && sellerID.isEmpty() && buyerID.isEmpty() && bidAmt.isEmpty()){
 		%>
 		<span>You need to edit at least one field of the bid!</span><br>
 		<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>
@@ -138,6 +141,26 @@ padding: 5px;
 		} catch(Exception e){
 			%>
 			<span>SQL Error occurred with editing Buyer ID!</span><br>
+			<%
+		}
+	}
+	
+	if(!bidAmt.isEmpty()){
+		try{
+			bidFloat = Float.parseFloat(bidAmt);
+			boolean success1 = cr.editBHCurrentBid(bidID, bidFloat);
+			if(success1){
+				%>
+				<span>Successfully updated Current Bid!</span><br>
+				<%
+			} else{
+				%>
+				<span>Oh no! New Current Bid is invalid!</span><br>
+				<%
+			}
+		} catch(Exception e){
+			%>
+			<span>SQL Error occurred with editing Current Bid!</span><br>
 			<%
 		}
 	}

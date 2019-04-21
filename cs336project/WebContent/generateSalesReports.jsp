@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="cs336project.*" %>
+
 <!DOCTYPE html>
 <html class="bg">
 <style>
@@ -36,10 +37,15 @@ input{
 	background-color: #FE6301;
 	color: white;
 }
-div span{
+span{
 	border: 2px solid black;
 	background-color: Brown;
 	color: white;
+}
+a{
+	border: 2px solid black;
+	background-color: tan;
+	color: blue;
 }
 td{
 margin:5px;
@@ -67,31 +73,42 @@ padding: 5px;
 </style>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Customer Representative</title>
+<title>Sales Reports</title>
 </head>
 <body>
-	<%
-		CustomerRepresentative cr = new CustomerRepresentative(session);
-		String user = request.getParameter("username");
-		String pass = request.getParameter("password");
-		boolean success = false;
-		if(!user.isEmpty() && user!=null){
-			if(!pass.isEmpty() && pass!=null){
-				success = cr.addCustomerRep(user, pass);
-				if(success){
-					out.println("New customer representative successfully added!");
-				} else{
-					out.println("Uh oh! Something went wrong!");
-				}
-			} else{
-				out.println("Password field cannot be empty!");
-			}
-		} else{
-			out.println("Username field cannot be empty!");
-		}
-	%>
 	
-	<a href="admin.jsp" class=box1>Return to Admin page</a>
+	<span>Total earnings: 
+	<%
+		User admin = new User(session);
+		float totalSales = admin.getSumOfSales();
+		String formattedSales = String.format("%.02f", totalSales);
+	%>
+	$<%=formattedSales %>
+	</span>
+	<br>
+	<br>
+	<span>View best-selling items</span>
+	<form action="bestSellingItems.jsp" method="post">
+		Maximum number of items to display: <input type="text" id="maxResults" name="maxResults" placeholder="10"><br>
+		<button type="submit" name="button" value="getBestSellers">Get Best-selling Items</button><br>
+	</form>
+	<br>
+	<br>
+	<span>View Best Buyers</span>
+	<form action="bestBuyers.jsp" method="post">
+		Maximum number of buyers to display: <input type="text" id="maxBuyers" name="maxBuyers" placeholder="10"><br>
+		<button type="submit" name="button" value="getBestBuyers">Get Best Buyers</button><br>
+	</form>
+	<br>
+	<br>
+	<a href="earningsPerItem.jsp" class=box1>View earnings per item</a><br>
+	<br>
+	<a href="earningsPerItemType.jsp" class=box1>View earnings per item type</a>
+	<br>
+	<a href="earningsPerSeller.jsp" class=box1>View earnings per seller</a>
 
+	<br><br>
+	<a href="admin.jsp" class=box1>Return to Admin page</a>
+	
 </body>
 </html>

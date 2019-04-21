@@ -1,48 +1,174 @@
 package cs336project;
 
+import java.sql.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 
-import com.mysql.jdbc.PreparedStatement;
 
 
-public class Buyer extends User{
+public class Buyer {
 	public ResultSet rs;
+	public ResultSet ns;
+
 	public HttpSession session;
 	public ApplicationDB db;
 	public Connection conn;
 	public Statement st;
 	public String sesh;
 	
-	public Buyer(){
-	}
-	
-	public String testMethod(int vin,int auctID,int curr_bid,int max_bid,String buyID){
-		System.out.println("started to run test");
+	public Buyer(HttpSession session) throws Exception{
 		db = new ApplicationDB();
 		conn = db.getConnection();
-		try {
-			st = conn.createStatement();
-			/*rs = st.executeQuery(" insert into Auction_System"
-		            + " values (?, ?, ?, ?)");*/
-			java.sql.PreparedStatement updateStud=conn.prepareStatement( "insert into Auction_System"
-		            + " values (?, ?, ?, ?, ?)"); 
-			
+		st = conn.createStatement();
+		this.session = session;
+		sesh = session.getAttribute("user").toString();
+		System.out.println("this is user from buyer");
+		rs = st.executeQuery("SELECT * FROM Auction a WHERE a.buyerID LIKE '" + sesh + "'");
+	}
+	//checks the timestamp of the Auction against current time
+	public boolean standardC(int auctID) throws SQLException {
+		boolean succ=false;
+		java.sql.PreparedStatement timeStud=conn.prepareStatement(
+				"select end_time FROM CS336.Auction WHERE Auction_ID=?");
+				timeStud.setInt(1, auctID);
+				ResultSet as=timeStud.executeQuery();		
+				long returnd=0;
+				while(as.next()) {
+				   returnd  = as.getLong(1);
+				   
+				}
+				Date dt=new Date(returnd);
+				
+				java.text.SimpleDateFormat sdf = 
+					     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-			updateStud.setInt(1,vin);
+					String endTime = sdf.format(dt);
+					long now = dt.getTime();
+					//Date current=new Date();
+					
+				String crrtimeStamp =   new java.text.SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US).format(new Date(System.currentTimeMillis()));
+				Date curr=new Date(System.currentTimeMillis());	
+				System.out.println(endTime);
+			    System.out.println(crrtimeStamp);
+				System.out.println("crrnt in mili"+System.currentTimeMillis());
+
+				boolean isafter=curr.after(dt);
+			    
+			    //if the current time returned isn't after the time now
+				//for now this should be false but later turn to true 
+				//this is because sql times are all in1965 and this is 2019
+			    if(isafter=true) {
+			    	succ=true;
+			    	
+			    	
+			    }
+
+			
+				
+				
+		
+		
+		
+		return succ;
+		
+	}
+
+	public long getfinalbid(int auctID) throws SQLException{
+
+		java.sql.PreparedStatement bidStud=conn.prepareStatement(
+				"select finalBid FROM CS336.Auction WHERE Auction_ID=?");
+				bidStud.setInt(1, auctID);
+				ResultSet as=bidStud.executeQuery();		
+				long returnd=0;
+				while(as.next()) {
+				   returnd  = as.getLong(1);
+				   
+				}
+				long value=returnd;
+				System.out.println("this is returned finalbid"+returnd);
+		
+		return value;
+		
+	}
+	public boolean setAuction(int auctID,int curr_bid,String buyID){
+		
+		
+		//Checking if Bid is a valid entry
+		//Date date = new Date();
+		//need an arar
+		//Timestamp now = new Timestamp(date.getTime());
+	
+		
+		//if bid is within time limit
+		    //if (now.before(auction.getEndDateTime())){
+		boolean isAdded=false;
+		
+		
+		try {
+	
+			String sellerID=" " ;
+			java.sql.PreparedStatement selectStud=conn.prepareStatement(
+			"select sellerID FROM CS336.Auction WHERE Auction_ID= ? ");
+			selectStud.setInt(1, auctID);
+			System.out.println("reached this point");
+			ResultSet as=selectStud.executeQuery();		
+			while(as.next()) {
+		    sellerID = as.getString(1);
+		   
+			}
+			System.out.println(sellerID);
+			as.close();
+			/* get the auctioh
+			 * pull up table auction
+			 * 
+			 */
+		 
+			//cant insert duplicate bid id's 
+			
+			
+			boolean validtime=standardC(auctID);
+			System.out.println("returned caniis"+validtime);
+			long fbid=getfinalbid(auctID);
+			
+			System.out.println("this is currenf"+getfinalbid(auctID));
+			
+			//need to  check minimum increment for now but get final bid and compare 
+			if(validtime && curr_bid>fbid) {
+				
+			java.sql.PreparedStatement updateStud=conn.prepareStatement(
+					"insert into Bid_History(bidID,Auction_ID,sellerID,buyerID,current_bid)"
+		            + " values (?, ?, ?, ?,?)"); 
+			
+           
+			updateStud.setInt(1,6);
+			
 			updateStud.setInt(2,auctID);
-			updateStud.setInt(3,curr_bid);
-			updateStud.setInt(4,max_bid);
-			updateStud.setString(5, buyID);
+			updateStud.setString(3,sellerID);
+			updateStud.setString(4, buyID);
+			updateStud.setLong(5 ,curr_bid);
+			 System.out.println("made bid");
+			// automatic bid
+								
 			updateStud.executeUpdate(); 
-			st.close();
+			System.out.println("sucssesfully ran updateStud");
+			
+			isAdded=true;
+			
+			
 			updateStud.close();
+			
+			}
+			st.close();
+			
 	
 	
 			
@@ -51,6 +177,8 @@ public class Buyer extends User{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			isAdded=false;
+
 		}
 	
 		
@@ -59,17 +187,12 @@ public class Buyer extends User{
 		
 		
 		
-	    return "Hello";
+	    return isAdded;
 	 
-	}
+}
 	
-	public Buyer(HttpSession session) throws Exception{
-		db = new ApplicationDB();
-		conn = db.getConnection();
-		st = conn.createStatement();
-		sesh = session.getAttribute("user").toString();
-		rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "'");
-	}
+	
+	
 	
 	
 	public List<String[]> listSellerItems() {
@@ -86,7 +209,6 @@ public class Buyer extends User{
 				allColumns.add(sArr);
 			}
 			//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
-			conn.close();
 			return allColumns;
 		} catch(Exception e) {
 			System.out.println(e);
@@ -103,6 +225,93 @@ public class Buyer extends User{
 			s = s + "\n";
 		}
 		return s;
+	}
+	
+	public boolean updateItem(String vin, String sdt, String cdt, String minPrice) {
+		boolean isUpdated = true;
+		try {
+			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='" + cdt + "', minPrice=" + minPrice + " WHERE vin=" + vin + ";";
+			int success = st.executeUpdate(query);
+			if(success == 0) {
+				isUpdated = false;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isUpdated=false;
+		}
+		return isUpdated;
+	}
+	
+	public boolean updateItem(String vin, String sdt, String cdt) {
+		boolean isUpdated = true;
+		try {
+			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='" + cdt + "' WHERE vin=" + vin + ";";
+			int success = st.executeUpdate(query);
+			if(success == 0) {
+				isUpdated = false;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isUpdated=false;
+		}
+		return isUpdated;
+	}
+	
+	public boolean addAuction(String vin, String sdt, String cdt, String minPrice) {
+		boolean isAdded = true;
+		try {
+			ResultSet auctionIds = st.executeQuery("SELECT Auction_ID FROM Auction");
+			int maxId = -1;
+			while(auctionIds.next()) {
+				if(auctionIds.getInt(1) >= maxId) maxId=auctionIds.getInt(1);
+			}
+			int insertId = maxId + 1;
+			String query = "INSERT INTO Auction VALUES('TBD', '";
+			query = query.concat(sdt);
+			query = query + "', ";
+			query = query + insertId;
+			query = query + ", '";
+			query = query + session.getAttribute("user");
+			query = query + "', 'monkey', ";
+			query = query + vin;
+			query = query + ", '";
+			query = query + cdt;
+			query = query + "', ";
+			query = query + minPrice + ");";
+			int update = st.executeUpdate(query);
+			if(update == 0) isAdded = false;
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isAdded=false;
+		}
+		return isAdded;
+	}
+	
+	public boolean addAuction(String vin, String sdt, String cdt) {
+		boolean isAdded = true;
+		try {
+			ResultSet auctionIds = st.executeQuery("SELECT Auction_ID FROM Auction");
+			int maxId = -1;
+			while(auctionIds.next()) {
+				if(auctionIds.getInt(1) >= maxId) maxId=auctionIds.getInt(1);
+			}
+			int insertId = maxId + 1;
+			String query = "INSERT INTO Auction VALUES('TBD', '" + sdt + "', " + insertId + ", '" + session.getAttribute("user") + "', 'N/A', " + vin + ", '" + cdt + ";";
+			int update = st.executeUpdate(query);
+			if(update == 0) isAdded = false;
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isAdded=false;
+		}
+		return isAdded;
+	}
+	
+	public void closeConnection() throws Exception{
+		conn.close();
 	}
 	
 }

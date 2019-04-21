@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="cs336project.*" %>
+    
 <!DOCTYPE html>
 <html class="bg">
 <style>
@@ -36,10 +37,15 @@ input{
 	background-color: #FE6301;
 	color: white;
 }
-div span{
+span{
 	border: 2px solid black;
 	background-color: Brown;
 	color: white;
+}
+a{
+	border: 2px solid black;
+	background-color: tan;
+	color: blue;
 }
 td{
 margin:5px;
@@ -67,31 +73,55 @@ padding: 5px;
 </style>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Customer Representative</title>
+<title>Best-selling Vehicles</title>
 </head>
 <body>
+	
 	<%
-		CustomerRepresentative cr = new CustomerRepresentative(session);
-		String user = request.getParameter("username");
-		String pass = request.getParameter("password");
-		boolean success = false;
-		if(!user.isEmpty() && user!=null){
-			if(!pass.isEmpty() && pass!=null){
-				success = cr.addCustomerRep(user, pass);
-				if(success){
-					out.println("New customer representative successfully added!");
-				} else{
-					out.println("Uh oh! Something went wrong!");
-				}
-			} else{
-				out.println("Password field cannot be empty!");
-			}
-		} else{
-			out.println("Username field cannot be empty!");
-		}
+		User admin = new User(session);
+		String maxBuyers = request.getParameter("maxBuyers");
+		try{
+			int maxResults = Integer.parseInt(maxBuyers);
+			admin.rs = admin.getBestBuyers(maxResults);
 	%>
 	
-	<a href="admin.jsp" class=box1>Return to Admin page</a>
+	<TABLE border="1"
+		style="background-color: Brown; align: center; color: Cornsilk">
+		<TR>
+			<th colspan="2">Best Buyers</th>
+		</TR>
 
+		<TR>
+			<td>Buyer ID</td>
+			<td>Total Spent</td>
+		</TR>
+		<%
+			while (admin.rs.next()) {
+				String buyerID = admin.rs.getString(1);
+				float totalBid = admin.rs.getFloat(2);
+				String formattedTotal = String.format("%.02f", totalBid);
+		%>
+
+		<TR>
+			<TD><%=buyerID%></TD>
+			<TD>$<%=formattedTotal%></TD>
+		</TR>
+
+		<% 	}
+		} catch(Exception e){
+		%>
+			<TR>
+				<TD>NO ITEMS HAVE BEEN BOUGHT YET</TD>
+				<TD>0</TD>
+			</TR>
+		<%}%>
+	</TABLE>
+
+
+	<br>
+	<br>
+	
+	<a href="generateSalesReports.jsp" class=box1>Return to Sales Reports page</a><br>
+	<a href="admin.jsp" class=box1>Return to Admin page</a>
 </body>
 </html>

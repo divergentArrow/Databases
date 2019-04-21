@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="cs336project.*" %>
+    
 <!DOCTYPE html>
 <html class="bg">
 <style>
@@ -30,27 +31,11 @@ form{
 	border: 2px solid black;
 	background-color: Brown;
 	color: white;
-	width: 50%;
 }
 input{
 	background-color: #FE6301;
 	color: white;
 }
-::-webkit-input-placeholder { /* Chrome */
-  color: #B0AEAE;
-}
-:-ms-input-placeholder { /* IE 10+ */
-  color: #B0AEAE;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  color: #B0AEAE;
-  opacity: 1;
-}
-:-moz-placeholder { /* Firefox 4 - 18 */
-  color: #B0AEAE;
-  opacity: 1;
-}
-
 span{
 	border: 2px solid black;
 	background-color: Brown;
@@ -73,21 +58,50 @@ padding: 5px;
 </style>
 <head>
 <meta charset="ISO-8859-1">
-<title>Admin</title>
+<title>Earnings per Item Type</title>
 </head>
 <body>
-<span>Create customer representative account</span> <br>
-<%
-	CustomerRepresentative tempCR = new CustomerRepresentative(session);
-	String tempText = "cr" + tempCR.maxCrid;
-%>
-<form action="addCustomerRepresentative.jsp" method="post">
-Username: <input type="text" id="username" name="username" placeholder=<%=tempText%>><br>
-Password: <input type="text" id="password" name="password" placeholder=<%=tempText%>><br>
-<button type="submit" name="button" value="addAuction">Create customer representative account</button><br>
-</form>
+	
+	<%
+		User admin = new User(session);
+		float carsEarnings = admin.getEarningsForCars();
+		float truckEarnings = admin.getEarningsForTrucks();
+		float suvEarnings = admin.getEarningsForSuvs();
+	%>
 
-<a href='generateSalesReports.jsp' class=box1>Generate Sales Reports</a>
+	<TABLE border="1"
+		style="background-color: Brown; align: center; color: Cornsilk">
+		<TR>
+			<th colspan="2">Earnings per Item Type</th>
+		</TR>
 
+		<TR>
+			<td>Item Type</td>
+			<td>Price</td>
+		</TR>
+
+		<TR>
+			<TD>Cars</TD>
+			<TD>$<%=carsEarnings%></TD>
+		</TR>
+		
+		<TR>
+			<TD>Trucks</TD>
+			<TD>$<%=truckEarnings%></TD>
+		</TR>
+		
+		<TR>
+			<TD>SUVs</TD>
+			<TD>$<%=suvEarnings%></TD>
+		</TR>
+
+	</TABLE>
+
+
+	<br>
+	<br>
+	
+	<a href="generateSalesReports.jsp" class=box1>Return to Sales Reports page</a><br>
+	<a href="admin.jsp" class=box1>Return to Admin page</a>
 </body>
 </html>

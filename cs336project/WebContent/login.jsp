@@ -56,10 +56,19 @@ out.println("<body>");
         session.setAttribute("pass", pwd);
         out.println("welcome " + userid);
         out.println("<a href='logout.jsp'>Log out</a>");
+        
         if(userid.equals("admin") && pwd.equals("admin")){
         	response.sendRedirect("admin.jsp");
-        } else{
-        	response.sendRedirect("success.jsp");
+        }
+        else{
+        	User dummyUser = new User(session);
+        	dummyUser.setUsername(userid);
+        	boolean isCR = dummyUser.isCR(pwd);
+        	if(isCR){
+        		response.sendRedirect("customerRep.jsp");
+        	} else{
+        		response.sendRedirect("success.jsp");
+        	}
         }
     } else {
         out.println("<br><center><div align=center class=box2><h1 align=center>Error! Invalid Username or Password</h1></div></center><br><br><div align=center><a href='index.jsp' class=box1>Try Again</a></div></body></html>");

@@ -156,14 +156,20 @@ public class Seller {
 				if(auctionIds.getInt(1) >= maxId) maxId=auctionIds.getInt(1);
 			}
 			int insertId = maxId + 1;
+			
+			
 			String vTab = "INSERT INTO Vehicle VALUES(";
 			vTab=vTab+vin+", '";
 			vTab=vTab+make+"', "+minPrice+", '";
 			vTab=vTab+model+"', '";
 			vTab=vTab+color+"', '";
 			vTab=vTab+sdt+"', '0001-01-01 00:00:00');";
+			// Creating a prepared statement before you execute.
+			
 			System.out.println(vTab);
-			int update2 = st2.executeUpdate(vTab);
+			java.sql.PreparedStatement updateStud=conn.prepareStatement(vTab);
+			
+			int update2 = updateStud.executeUpdate();
 			if(update2 == 0) isAdded = false;
 			String carTab="INSERT INTO Cars VALUES('";
 			carTab = carTab+make + "','";

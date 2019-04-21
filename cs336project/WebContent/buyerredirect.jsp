@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="cs336project.*" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="cs336project.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<%
+	<%
 		System.out.println("starting redirect");
 		Buyer buyer=new Buyer(session);
 		System.out.println("this is user"+(String)session.getAttribute("user"));
@@ -23,7 +23,7 @@
 		int Auct_ID =Integer.parseInt(request.getParameter("Auction_ID"));
 		int current_bid =Integer.parseInt(request.getParameter("current_bid"));
 		//int max_bid =Integer.parseInt(request.getParameter("max_bid"));
-		String buyerID = request.getParameter("buyerID");
+		//String buyerID = request.getParameter("buyerID");
 		//System.out.println(vin);
 		System.out.println(Auct_ID);
 		System.out.println(current_bid);
@@ -36,7 +36,7 @@
 				//vin!=0 && Auct_ID!=0 && current_bid!=0 &&  !buyerID.isEmpty()
 				//if(max_bid==0){
 					System.out.print("running code on input");
-					success = buyer.setAuction(Auct_ID, current_bid, buyerID);
+					success = buyer.setAuction(Auct_ID, current_bid);
 				//} else{
 					//code for no max bid
 				//}
@@ -54,12 +54,7 @@
 			out.println("Error with input! Try again.<br>");
 		}
 	%>
-<a href='buyer.jsp' class=box1>Return to buyer page</a>
-		
-		
-	
-		
-%>
+	<a href='buyer.jsp' class=box1>Return to buyer page</a> %>
 
 </body>
 </html>

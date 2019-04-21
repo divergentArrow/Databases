@@ -26,7 +26,6 @@
 
 	Auction_ID:<input type="text" name="Auction_ID" placeholder="1949" /><br>
 	CrrBid amount:<input type="text" name="current_bid" placeholder="0" /><br>
-	Buy_ID:<input type="text" name="buyerID" placeholder="monkey" />	
 	<input type="submit" value="Bid" />
 	</form>	
 		

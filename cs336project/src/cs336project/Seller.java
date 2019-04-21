@@ -1,21 +1,23 @@
 package cs336project;
 
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
 
 public class Seller {
 	public ResultSet rs;
+	public ResultSet rs2;
+	public ResultSet rs3;
 	public HttpSession session;
 	public ApplicationDB db;
 	public Connection conn;
 	public Statement st;
+	public Statement st2;
+	public Statement st3;
+	public Statement useST;
+	public Statement makerST;
 	public String sesh;
 	
 	public Seller(HttpSession session) throws Exception{
@@ -91,7 +93,7 @@ public class Seller {
 		return isUpdated;
 	}
 	
-	public boolean addAuction(String vin, String sdt, String cdt, String minPrice) {
+	public boolean addAuctionT(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String vehicle_truck) {
 		boolean isAdded = true;
 		try {
 			ResultSet auctionIds = st.executeQuery("SELECT Auction_ID FROM Auction");
@@ -100,13 +102,13 @@ public class Seller {
 				if(auctionIds.getInt(1) >= maxId) maxId=auctionIds.getInt(1);
 			}
 			int insertId = maxId + 1;
-			String query = "INSERT INTO Auction VALUES('TBD', '";
+			String query = "INSERT INTO Auction (winner,start_time,Auction_ID,sellerID,buyerID,vin,end_time,minPrice) VALUES('TBD', '";
 			query = query.concat(sdt);
 			query = query + "', ";
 			query = query + insertId;
 			query = query + ", '";
 			query = query + session.getAttribute("user");
-			query = query + "', 'monkey', ";
+			query = query + "', 'tbd', ";
 			query = query + vin;
 			query = query + ", '";
 			query = query + cdt;
@@ -114,6 +116,29 @@ public class Seller {
 			query = query + minPrice + ");";
 			int update = st.executeUpdate(query);
 			if(update == 0) isAdded = false;
+			String vTab = "INSERT INTO Vehicle VALUES(";
+			vTab=vTab+vin+", '";
+			vTab=vTab+make+"', "+minPrice+", '";
+			vTab=vTab+model+"', '";
+			vTab=vTab+color+"', '";
+			vTab=vTab+sdt+"', '0001-01-01 00:00');";
+			int update2 = st2.executeUpdate(vTab);
+			if(update2 == 0) isAdded = false;
+			String carTab="INSERT INTO Truck VALUES('";
+			carTab = carTab+make + "','";
+			carTab = carTab+model + "',";
+			carTab = carTab+minPrice + ",'";
+			carTab = carTab+color + "','";
+			carTab = carTab+"0001-01-01 00:00', '";
+			carTab = carTab+sdt + "',";
+			carTab = carTab+vin + ",";
+			carTab = carTab+vehicle_truck + ");";
+			int update3 = st3.executeUpdate(carTab);
+			if(update3 == 0) isAdded = false;
+			
+
+			//make model price color sold posted VIN cylinders
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Error in input");
@@ -122,7 +147,7 @@ public class Seller {
 		return isAdded;
 	}
 	
-	public boolean addAuction(String vin, String sdt, String cdt) {
+	public boolean addAuctionC(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String which_vehicle) {
 		boolean isAdded = true;
 		try {
 			ResultSet auctionIds = st.executeQuery("SELECT Auction_ID FROM Auction");
@@ -131,9 +156,42 @@ public class Seller {
 				if(auctionIds.getInt(1) >= maxId) maxId=auctionIds.getInt(1);
 			}
 			int insertId = maxId + 1;
-			String query = "INSERT INTO Auction VALUES('TBD', '" + sdt + "', " + insertId + ", '" + session.getAttribute("user") + "', 'N/A', " + vin + ", '" + cdt + ";";
+			String vTab = "INSERT INTO Vehicle VALUES(";
+			vTab=vTab+vin+", '";
+			vTab=vTab+make+"', "+minPrice+", '";
+			vTab=vTab+model+"', '";
+			vTab=vTab+color+"', '";
+			vTab=vTab+sdt+"', '0001-01-01 00:00:00');";
+			System.out.println(vTab);
+			int update2 = st2.executeUpdate(vTab);
+			if(update2 == 0) isAdded = false;
+			String carTab="INSERT INTO Cars VALUES('";
+			carTab = carTab+make + "','";
+			carTab = carTab+model + "',";
+			carTab = carTab+minPrice + ",'";
+			carTab = carTab+color + "','";
+			carTab = carTab+"0001-01-01 00:00', '";
+			carTab = carTab+sdt + "',";
+			carTab = carTab+vin + ",";
+			carTab = carTab+which_vehicle + ");";
+			System.out.println(carTab);
+			int update3 = st3.executeUpdate(carTab);
+			if(update3 == 0) isAdded = false;
+			String query = "INSERT INTO Auction (winner,start_time,Auction_ID,sellerID,buyerID,vin,end_time,minPrice) VALUES('TBD', '";
+			query = query.concat(sdt);
+			query = query + "', ";
+			query = query + insertId;
+			query = query + ", '";
+			query = query + session.getAttribute("user");
+			query = query + "', 'tbd', ";
+			query = query + vin;
+			query = query + ", '";
+			query = query + cdt;
+			query = query + "', ";
+			query = query + minPrice + ");";
 			int update = st.executeUpdate(query);
 			if(update == 0) isAdded = false;
+
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Error in input");
@@ -141,7 +199,60 @@ public class Seller {
 		}
 		return isAdded;
 	}
-	
+	public boolean addAuctionS(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String vehicle_suv) {
+		boolean isAdded = true;
+		try {
+			
+			ResultSet auctionIds = st.executeQuery("SELECT Auction_ID FROM Auction");
+			int maxId = -1;
+			while(auctionIds.next()) {
+				if(auctionIds.getInt(1) >= maxId) maxId=auctionIds.getInt(1);
+			}
+			int insertId = maxId + 1;
+			String query = "INSERT INTO Auction (winner,start_time,Auction_ID,sellerID,buyerID,vin,end_time,minPrice) VALUES('TBD', '";
+			query = query.concat(sdt);
+			query = query + "', ";
+			query = query + insertId;
+			query = query + ", '";
+			query = query + session.getAttribute("user");
+			query = query + "', 'tbd', ";
+			query = query + vin;
+			query = query + ", '";
+			query = query + cdt;
+			query = query + "', ";
+			query = query + minPrice + ");";
+			int update = st.executeUpdate(query);
+			if(update == 0) isAdded = false;
+			String vTab = "INSERT INTO Vehicle VALUES(";
+			vTab=vTab+vin+", '";
+			vTab=vTab+make+"', "+minPrice+", '";
+			vTab=vTab+model+"', '";
+			vTab=vTab+color+"', '";
+			vTab=vTab+sdt+"', '0001-01-01 00:00');";
+			int update2 = st2.executeUpdate(vTab);
+			if(update2 == 0) isAdded = false;
+			String carTab="INSERT INTO Suv VALUES('";
+			carTab = carTab+make + "','";
+			carTab = carTab+model + "',";
+			carTab = carTab+minPrice + ",'";
+			carTab = carTab+color + "','";
+			carTab = carTab+"0001-01-01 00:00', '";
+			carTab = carTab+sdt + "',";
+			carTab = carTab+vin + ",";
+			carTab = carTab+vehicle_suv + ");";
+			int update3 = st3.executeUpdate(carTab);
+			if(update3 == 0) isAdded = false;
+			
+
+			//make model price color sold posted VIN cylinders
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isAdded=false;
+		}
+		return isAdded;
+	}
 	public void closeConnection() throws Exception{
 		conn.close();
 	}

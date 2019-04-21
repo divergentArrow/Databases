@@ -80,6 +80,7 @@
 		conn.close();
 		out.println("insert succeeded ");
 		session.setAttribute("user", usern); // the username will be stored in the session
+		session.setAttribute("pass", passcode);
         out.println("welcome " + usern);
         out.println("<a href='logout.jsp'>Log out</a>");
         response.sendRedirect("success.jsp");

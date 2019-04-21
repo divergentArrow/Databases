@@ -53,6 +53,7 @@ out.println("<body>");
     if (rs.next()) {
     	
         session.setAttribute("user", userid); // the username will be stored in the session
+        session.setAttribute("pass", pwd);
         out.println("welcome " + userid);
         out.println("<a href='logout.jsp'>Log out</a>");
         if(userid.equals("admin") && pwd.equals("admin")){

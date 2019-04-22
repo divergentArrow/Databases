@@ -38,16 +38,13 @@ padding: 5px;
   border: none;
   cursor: pointer;
 }
-
 .dropbtn:hover, .dropbtn:focus {
   background-color: #2980B9;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -57,16 +54,13 @@ padding: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-
 .dropdown-content a {
   color: black;
   padding: 10px 14px;
   text-decoration: none;
   display: block;
 }
-
 .dropdown a:hover {background-color: #ddd;}
-
 .show {display: block;}
 </style>
 <head>
@@ -77,28 +71,24 @@ padding: 5px;
 <div align=center><h1 align=center class=box2>Vehicles!</h1></div>
 <%
 try {
-
 ApplicationDB db = new ApplicationDB();	
 Connection conn = db.getConnection();
-
 //declare a resultset that uses as a table for output data from tha table.
 ResultSet rs = null;
 ResultSet rsSuv=null;
 ResultSet rsTruck=null;
-
 /* createStatement() is used for create statement object that is used for 
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
 Statement statement1 = conn.createStatement();
 Statement statement2 = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryCar = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,c.VIN,c.Make,c.Model,c.Color,c.Cylinders, a.buyerID,Bid_History.current_bid from Auction a JOIN Cars c ON c.VIN=a.vin JOIN Bid_History ON Bid_History.Auction_ID=a.Auction_ID group by (Auction_ID);";
-String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,Bid_History.current_bid from Auction a JOIN Truck t ON t.VIN=a.vin JOIN Bid_History ON Bid_History.Auction_ID=a.Auction_ID group by (Auction_ID);";
-String QuerySuv = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,s.VIN,s.Make,s.Model,s.Color,s.Seats, a.buyerID,Bid_History.current_bid from Auction a JOIN Suv s ON s.VIN=a.vin JOIN Bid_History ON Bid_History.Auction_ID=a.Auction_ID group by (Auction_ID);";
+String QueryCar = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,c.VIN,c.Make,c.Model,c.Color,c.Cylinders, a.buyerID,a.curr_bid from Auction a JOIN Cars c ON c.VIN=a.vin group by (Auction_ID);";
+String QueryTruck = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,t.VIN,t.Make,t.Model,t.Color,t.axles, a.buyerID,a.curr_bid from Auction a JOIN Truck t ON t.VIN=a.vin group by (Auction_ID);";
+String QuerySuv = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,s.VIN,s.Make,s.Model,s.Color,s.Seats, a.buyerID,a.curr_bid from Auction a JOIN Suv s ON s.VIN=a.vin group by (Auction_ID);";
 rs = statement.executeQuery(QueryCar);
 rsSuv = statement1.executeQuery(QuerySuv);
 rsTruck = statement2.executeQuery(QueryTruck);
-
 %>
 <div class="dropdown">
   <button onclick="myFunction()" class="dropbtn">Click To Sort By</button>
@@ -151,8 +141,8 @@ while (rs.next()) {
 <TD><%=rs.getString(7)%></TD>
 <TD><%=rs.getString(8)%></TD>
 <TD><%=rs.getInt("Cylinders")%></TD>
-<TD><%=rs.getString(7)%></TD>
-<TD><%=rs.getInt("current_bid")%></TD>
+<TD><%=rs.getString(10)%></TD>
+<TD><%=rs.getInt("curr_bid")%></TD>
 </TR>
 <% } %>
 </TABLE>
@@ -194,8 +184,8 @@ while (rsSuv.next()) {
 <TD><%=rsSuv.getString(7)%></TD>
 <TD><%=rsSuv.getString(8)%></TD>
 <TD><%=rsSuv.getInt("Seats")%></TD>
-<TD><%=rsSuv.getString(7)%></TD>
-<TD><%=rsSuv.getInt("current_bid")%></TD>
+<TD><%=rsSuv.getString(10)%></TD>
+<TD><%=rsSuv.getInt("curr_bid")%></TD>
 </TR>
 
 <% } %>
@@ -238,8 +228,8 @@ while (rsTruck.next()) {
 <TD><%=rsTruck.getString(7)%></TD>
 <TD><%=rsTruck.getString(8)%></TD>
 <TD><%=rsTruck.getInt("Axles")%></TD>
-<TD><%=rsTruck.getString(7)%></TD>
-<TD><%=rsTruck.getInt("current_bid")%></TD>
+<TD><%=rsTruck.getString(10)%></TD>
+<TD><%=rsTruck.getInt("curr_bid")%></TD>
 </TR>
 
 <% } %>
@@ -251,6 +241,8 @@ rs.close();
 rsSuv.close();
 rsTruck.close();
 statement.close();
+statement1.close();
+statement2.close();
 conn.close();
 }catch (Exception ex) {
 %>
@@ -270,7 +262,6 @@ toggle between hiding and showing the dropdown content */
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
-
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {

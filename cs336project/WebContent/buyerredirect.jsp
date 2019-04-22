@@ -22,7 +22,7 @@
 		//int vin = Integer.valueOf(vinS);
 		int Auct_ID =Integer.parseInt(request.getParameter("Auction_ID"));
 		int current_bid =Integer.parseInt(request.getParameter("current_bid"));
-		//int max_bid =Integer.parseInt(request.getParameter("max_bid"));
+		int upperlim_bid=Integer.parseInt(request.getParameter("upperlim_bid"));
 		//String buyerID = request.getParameter("buyerID");
 		//System.out.println(vin);
 		System.out.println(Auct_ID);
@@ -36,7 +36,7 @@
 				//vin!=0 && Auct_ID!=0 && current_bid!=0 &&  !buyerID.isEmpty()
 				//if(max_bid==0){
 					System.out.print("running code on input");
-					success = buyer.setAuction(Auct_ID, current_bid);
+					success = buyer.setAuction(Auct_ID, current_bid,upperlim_bid);
 				//} else{
 					//code for no max bid
 				//}

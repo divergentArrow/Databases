@@ -26,6 +26,8 @@
 
 	Auction_ID:<input type="text" name="Auction_ID" placeholder="1949" /><br>
 	CrrBid amount:<input type="text" name="current_bid" placeholder="0" /><br>
+	Secret upperlim amount:<input type="text" name="upperlim_bid" placeholder="0" /><br>
+	
 	<input type="submit" value="Bid" />
 	</form>	
 		

@@ -89,7 +89,7 @@ ResultSet rs = null;
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryV = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,v.VIN,v.Make,v.Model,v.Color,a.buyerID,Bid_History.current_bid from Auction a JOIN Vehicle v ON v.VIN=a.vin JOIN Bid_History ON Bid_History.Auction_ID=a.Auction_ID  group by (Auction_ID) order by Auction_ID;";
+String QueryV = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,v.VIN,v.Make,v.Model,v.Color,a.buyerID,a.curr_bid from Auction a JOIN Vehicle v ON v.VIN=a.vin group by (Auction_ID) order by Auction_ID;";
 
 rs = statement.executeQuery(QueryV);
 
@@ -144,7 +144,7 @@ while (rs.next()) {
 <TD><%=rs.getString(7)%></TD>
 <TD><%=rs.getString(8)%></TD>
 <TD><%=rs.getString(9)%></TD>
-<TD><%=rs.getInt("current_bid")%></TD>
+<TD><%=rs.getBigDecimal("curr_bid")%></TD>
 </TR>
 
 <% } %>

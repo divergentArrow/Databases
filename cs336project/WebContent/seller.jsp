@@ -166,10 +166,12 @@ padding: 5px;
 				<td>Start time</td>
 				<td>End time</td>
 				<td>Minimum Price</td>
+				<td>Current Bid</td>
+				<!-- 
 				<td>Color</td>
 				<td>Make</td>
 				<td>Model</td>
-				
+				-->
 			</tr>
 		<%
 			System.out.println("cool getting started");
@@ -185,9 +187,13 @@ padding: 5px;
 				<td><%out.println(seller.rs.getDate("start_time")); out.println(seller.rs.getTime("start_time"));%></td>
 				<td><%out.println(seller.rs.getDate("end_time")); out.println(seller.rs.getTime("end_time"));%></td>
 				<td><%out.println(seller.rs.getFloat("minPrice")); %></td>
-				<td><%out.println(seller.rs.getString("Color")); %></td>
-				<td><%out.println(seller.rs.getString("Make")); %></td>
-				<td><%out.println(seller.rs.getString("Model")); %></td>
+				<td><%out.println(seller.rs.getFloat("curr_bid")); %></td>
+				
+				<!--  
+				<td><%//out.println(seller.rs.getString("Color")); %></td>
+				<td><%//out.println(seller.rs.getString("Make")); %></td>
+				<td><%//out.println(seller.rs.getString("Model")); %></td>
+				-->
 			</tr>
 		<%
 			}

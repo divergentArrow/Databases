@@ -16,10 +16,20 @@
   padding: 4px 4px;
   margin-bottom: 7px;
   margin-top: 7px; 
-  background-color: Brown;
-  color: Cornsilk ;
+  background-color: darkGreen;
+  color: white ;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   width: 20%;
+  align: center;
+}
+.box3{
+  padding: 2px 2px;
+  margin-bottom: 7px;
+  margin-top: 7px; 
+  background-color: blue;
+  color: yellow ;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 8%;
   align: center;
 }
 table{
@@ -120,7 +130,10 @@ padding: 5px;
 			} catch(NullPointerException e){
 				out.println("Null values for input not allowed!<br>");
 			}
-			
+			%>
+			<div align=center class=box2>
+			<p>
+			<%
 			if(success){
 				out.println("New auction request sent.<br>");
 				out.println("This does NOT mean the request was valid!<br>");
@@ -131,6 +144,7 @@ padding: 5px;
 				
 			}
 		%>
-	<a href='seller.jsp' class=box1>Return to Seller page</a>
+		</p></div>
+	<a href='seller.jsp' class=box3>Return to Seller page</a>
 </body>
 </html>

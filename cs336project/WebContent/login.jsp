@@ -1,4 +1,7 @@
-
+<%--
+	@author Fareen Pourmoussavian
+	@author Jimmy Wen
+ --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="cs336project.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>

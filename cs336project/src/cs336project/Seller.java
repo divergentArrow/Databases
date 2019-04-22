@@ -1,5 +1,8 @@
 package cs336project;
-
+/**
+ * @author Jimmy Wen
+ * @author Fareen Pourmoussavian
+ */
 import java.sql.*;
 import java.util.*;
 

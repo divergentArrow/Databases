@@ -1,4 +1,8 @@
 package cs336project;
+/**
+ * @author Fareen Pourmoussavian
+ * @author Jimmy Wen
+ */
 
 import java.sql.Connection;
 import java.sql.ResultSet;

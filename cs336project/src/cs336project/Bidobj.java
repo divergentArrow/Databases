@@ -1,5 +1,7 @@
 package cs336project;
-
+/**
+ * @author Kamarudeen Ayankunbi
+ */
 public class Bidobj {
 	long bidId;
 	long bidamount;

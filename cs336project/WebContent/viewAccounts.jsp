@@ -93,8 +93,13 @@ padding: 5px;
 		<span>No users exist yet.</span>
 		<%
 	}
-%>
-<a href='customerRep.jsp' class=box1>Return to Customer Representative page</a><br>
-
+	if(session.getAttribute("user").equals("admin")){
+		%>
+		<a href='admin.jsp' class=box1>Return to Admin page</a><br>
+		<%
+	} else {
+	%>
+	<a href='customerRep.jsp' class=box1>Return to Customer Representative page</a><br>
+	<%} %>
 </body>
 </html>

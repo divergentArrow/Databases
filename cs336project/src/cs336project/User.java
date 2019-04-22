@@ -45,10 +45,20 @@ public class User {
 		st = conn.createStatement();
 		this.session = session;
 		sesh = session.getAttribute("user").toString();
+		this.username = session.getAttribute("user").toString();
 		updateAuctions();
-		rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "'");
-		if(this.username!=null && this.username.equalsIgnoreCase("admin")) {
+		rs = st.executeQuery("SELECT * FROM Customer_Representative");
+		
+		if(this.username!=null && this.username.equals("admin")) {
 			this.setAdminS(true);
+		}
+		
+		this.isCrep = false;
+		while(rs.next()) {
+			if(this.username.equals(rs.getString(2))) {
+				this.isCrep = true;
+				break;
+			}
 		}
 	}
 	
@@ -228,6 +238,7 @@ public class User {
 	public boolean isCR(String password) {
 		boolean cr = false;
 		if(this.isCrep) {
+			
 			return true;
 		} else {
 			String user = this.username;

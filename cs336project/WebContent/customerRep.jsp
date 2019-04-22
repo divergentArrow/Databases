@@ -79,7 +79,11 @@ padding: 5px;
 <%
 	CustomerRepresentative cr = new CustomerRepresentative(session);
 %>
-<span>Placeholder text for access to forum page</span>
+<br>
+<a href="viewAccounts.jsp">View All Existing User Accounts</a><br><br>
+<a href="viewBidHistory.jsp">View Bid History</a><br><br>
+<a href="viewAuctions.jsp">View All Existing Auctions</a><br><br>
+
 
 <br><br>
 

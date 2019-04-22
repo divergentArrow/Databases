@@ -80,7 +80,8 @@ padding: 5px;
 		<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>
 		<%
 		return;
-	}if(auctionID.isEmpty() && sellerID.isEmpty() && buyerID.isEmpty() && bidAmt.isEmpty()){
+	}
+	if(auctionID.isEmpty() && sellerID.isEmpty() && buyerID.isEmpty() && bidAmt.isEmpty()){
 		%>
 		<span>You need to edit at least one field of the bid!</span><br>
 		<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>

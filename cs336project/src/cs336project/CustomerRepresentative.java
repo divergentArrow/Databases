@@ -117,4 +117,114 @@ public class CustomerRepresentative {
 			return true;
 		}
 	}
+	
+	public boolean editAuctionWinner(String auctionId, String winner) throws Exception{
+		String query = "UPDATE Auction SET winner='" + winner + "' WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editAuctionStartTime(String auctionId, String startTime) throws Exception{
+		String query = "UPDATE Auction SET start_time='" + startTime + "' WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editAuctionSeller(String auctionId, String sellerId) throws Exception{
+		String query = "UPDATE Auction SET sellerID='" + sellerId + "' WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editAuctionBuyer(String auctionId, String buyerId) throws Exception{
+		String query = "UPDATE Auction SET buyerID='" + buyerId + "' WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editAuctionVIN(String auctionId, String vin) throws Exception{
+		String query = "UPDATE Auction SET vin=" + vin + " WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editAuctionEndTime(String auctionId, String endTime) throws Exception{
+		String query = "UPDATE Auction SET end_time='" + endTime + "' WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editAuctionMinPrice(String auctionId, String minPrice) throws Exception{
+		String query = "UPDATE Auction SET minPrice=" + minPrice + " WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editAuctionFinalBid(String auctionId, String finalBid) throws Exception{
+		String query = "UPDATE Auction SET finalBid=" + finalBid + " WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editAuctionCurrBid(String auctionId, String currBid) throws Exception{
+		String query = "UPDATE Auction SET curr_bid=" + currBid + " WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public boolean editAuctionMinIncr(String auctionId, String minIncr) throws Exception{
+		String query = "UPDATE Auction SET min_incr=" + minIncr + " WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

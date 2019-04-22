@@ -213,7 +213,7 @@ public class User {
 				}
 			}
 		} catch(Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.out.println("Either reached end of ResultSet or exception was caught while trying to update auctions");
 			return false;
 		}

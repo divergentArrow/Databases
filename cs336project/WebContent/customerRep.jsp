@@ -102,6 +102,22 @@ New Current Bid: <input type="text" id="currentBid" name="currentBid" placeholde
 <button type="submit" name="button" value="editUser">Edit Bid</button><br>
 </form>
 
+<br><br>
+<span>Edit an Auction</span><br>
+<form action="editAuctions.jsp" method="post">
+Auction ID: <input type="text" id="aAuctionID" name="aAuctionID" placeholder="1949"><br>
+New Winner: <input type="text" id="aWinner" name="aWinner" placeholder="Winner Username"><br>
+New Seller: <input type="text" id="aSellerID" name="aSellerID" placeholder="Seller Username"><br>
+New Buyer: <input type="text" id="aBuyerID" name="aBuyerID" placeholder="Buyer Username"><br>
+New VIN: <input type="text" id="aVin" name="aVin" placeholder="1"><br>
+New Start Time: <input type="text" id="aStartTime" name="aStartTime" placeholder="11-02-2018 00:00:00"><br>
+New End Time: <input type="text" id="aEndTime" name="aEndTime" placeholder="06-02-2019 00:00:00"><br>
+New Minimum Price: <input type="text" id="aMinPrice" name="aMinPrice" placeholder="10000.00"><br>
+New Final Bid: <input type="text" id="aFinalBid" name="aFinalBid" placeholder="40000.00"><br>
+New Current Bid: <input type="text" id="aCurrentBid" name="aCurrentBid" placeholder="20000.00"><br>
+New Minimum Increment: <input type="text" id="buyerID" name="buyerID" placeholder="2.00"><br>
+<button type="submit" name="button" value="editAuction">Edit Auction</button><br>
+</form>
 
 
 <a href='success.jsp' class=box1>Home</a><br>

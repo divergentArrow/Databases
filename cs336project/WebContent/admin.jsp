@@ -88,7 +88,8 @@ Password: <input type="text" id="password" name="password" placeholder=<%=tempTe
 <button type="submit" name="button" value="addAuction">Create customer representative account</button><br>
 </form>
 
-<a href='generateSalesReports.jsp' class=box1>Generate Sales Reports</a>
+<a href='generateSalesReports.jsp' class=box1>Generate Sales Reports</a><br>
+<a href="logout.jsp" class=box1>Log out</a>
 
 </body>
 </html>

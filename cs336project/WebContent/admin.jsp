@@ -76,6 +76,7 @@ padding: 5px;
 <title>Admin</title>
 </head>
 <body>
+<a href="viewAccounts.jsp">View All Existing User Accounts</a><br><br>
 <span>Create customer representative account</span> <br>
 <%
 	CustomerRepresentative tempCR = new CustomerRepresentative(session);

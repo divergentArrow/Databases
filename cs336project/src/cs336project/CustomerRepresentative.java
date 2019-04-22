@@ -227,4 +227,30 @@ public class CustomerRepresentative {
 			return true;
 		}
 	}
+	
+	public boolean removeAuction(String auctionId) throws Exception{
+		String query = "DELETE FROM Auction WHERE Auction_ID=" + auctionId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			User user = new User(session);
+			user.updateAuctions();
+			return true;
+		}
+	}
+	
+	public boolean removeBid(String bidId) throws Exception{
+		String query = "DELETE FROM Bid_History WHERE bidID=" + bidId;
+		int updated = st.executeUpdate(query);
+		if(updated == 0) {
+			System.out.println("Error with UPDATE query");
+			return false;
+		} else {
+			User user = new User(session);
+			user.updateAuctions();
+			return true;
+		}
+	}
 }

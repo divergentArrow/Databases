@@ -119,7 +119,21 @@ New Minimum Increment: <input type="text" id="buyerID" name="buyerID" placeholde
 <button type="submit" name="button" value="editAuction">Edit Auction</button><br>
 </form>
 
+<br><br>
+<span>Delete a Bid</span><br>
+<form action="deleteBids.jsp" method="post">
+Bid ID: <input type="text" id="dbidID" name="dbidID" placeholder="1"><br>
+<button type="submit" name="button" value="deleteBid">Delete Bid</button><br>
+</form>
 
+<br><br>
+<span>Delete an Auction</span><br>
+<form action="deleteAuctions.jsp" method="post">
+Auction ID: <input type="text" id="dauctionID" name="dauctionID" placeholder="1"><br>
+<button type="submit" name="button" value="deleteAuction">Delete Auction</button><br>
+</form>
+
+<br><br>
 <a href='success.jsp' class=box1>Home</a><br>
 <a href='logout.jsp' class=box1>Log out</a>
 </body>

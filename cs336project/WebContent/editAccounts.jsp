@@ -99,7 +99,7 @@ padding: 5px;
 				<%
 			} else{
 				%>
-				<span>Oops! An error with your request has occurred.</span><br>
+				<span>Oops! An error with your request has occurred. Please check that the user exists.</span><br>
 				<%
 			}
 		} catch(NumberFormatException e){

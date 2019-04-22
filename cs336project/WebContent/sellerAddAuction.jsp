@@ -86,6 +86,7 @@ padding: 5px;
 			make=make.trim();
 			String model = request.getParameter("model");
 			model=model.trim();
+			String bid = request.getParameter("bid");
 			String vehicle = request.getParameter("vehicles");
 			boolean success = false;
 			try{
@@ -94,37 +95,36 @@ padding: 5px;
 				
 				String vehicle_truck = request.getParameter("vehicle-t");
 				vehicle_truck=vehicle_truck.trim();
-				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_truck.isEmpty()){
+				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_truck.isEmpty()&& !bid.isEmpty()){
 					if(minPrice.isEmpty()){
 						throw new NullPointerException("minPrice");
 					} 
 					else{
-						success = seller.addAuctionT(vin, sdt, cdt, minPrice,color,make,model,vehicle_truck);
+						success = seller.addAuctionT(vin, sdt, cdt, minPrice,color,make,model,vehicle_truck,bid);
 					}
 				}
 			}
 			else if(vehicle.equals("cars")){
 				String which_vehicle = request.getParameter("which-vehicle");
 				which_vehicle=which_vehicle.trim();
-				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!which_vehicle.isEmpty()){
+				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!which_vehicle.isEmpty()&&!bid.isEmpty()){
 					if(minPrice.isEmpty()){
 						throw new NullPointerException("minPrice");
 					} 
 					else{
-						success = seller.addAuctionC(vin, sdt, cdt, minPrice,color,make,model,which_vehicle);
-						out.println(vin+" "+sdt+" "+cdt+" "+minPrice+" "+color+" "+make+" "+model+" "+vehicle+" "+which_vehicle);	
+						success = seller.addAuctionC(vin, sdt, cdt, minPrice,color,make,model,which_vehicle,bid);
 					}
 				}
 			}
 			else if(vehicle.equals("suv")){
 				String vehicle_suv= request.getParameter("vehicle-s");
 				vehicle_suv=vehicle_suv.trim();
-				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_suv.isEmpty()){
+				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_suv.isEmpty()&& !bid.isEmpty()){
 					if(minPrice.isEmpty()){
 						throw new NullPointerException("minPrice");
 					} 
 					else{
-						success = seller.addAuctionS(vin, sdt, cdt, minPrice,color,make,model,vehicle_suv);
+						success = seller.addAuctionS(vin, sdt, cdt, minPrice,color,make,model,vehicle_suv,bid);
 					}
 				}
 			}

@@ -29,7 +29,7 @@ public class Seller {
 		st = conn.createStatement();
 		this.session = session;
 		sesh = session.getAttribute("user").toString();
-		rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "'");
+		rs = st.executeQuery("SELECT * FROM Auction a WHERE a.sellerID LIKE '" + sesh + "';");
 	}
 	
 	public List<String[]> listSellerItems() {
@@ -96,7 +96,7 @@ public class Seller {
 		return isUpdated;
 	}
 	
-	public boolean addAuctionT(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String vehicle_truck) {
+	public boolean addAuctionT(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String vehicle_truck, String bid) {
 		boolean isAdded = true;
 		try {
 			ResultSet auctionIds = st.executeQuery("SELECT Auction_ID FROM Auction");
@@ -128,7 +128,7 @@ public class Seller {
 			int update3 = updateTruck.executeUpdate();
 			if(update3 == 0) isAdded = false;
 			
-			String query = "INSERT INTO Auction (winner,start_time,Auction_ID,sellerID,buyerID,vin,end_time,minPrice) VALUES('TBD', '";
+			String query = "INSERT INTO Auction (winner,start_time,Auction_ID,sellerID,buyerID,vin,end_time,minPrice,min_incr) VALUES('TBD', '";
 			query = query.concat(sdt);
 			query = query + "', ";
 			query = query + insertId;
@@ -139,7 +139,8 @@ public class Seller {
 			query = query + ", '";
 			query = query + cdt;
 			query = query + "', ";
-			query = query + minPrice + ");";
+			query = query + minPrice;
+			query = query + ", " + bid +  ");";
 			java.sql.PreparedStatement updateAuc=conn.prepareStatement(query);
 			int update = updateAuc.executeUpdate();
 			if(update == 0) isAdded = false;
@@ -152,7 +153,7 @@ public class Seller {
 		return isAdded;
 	}
 	
-	public boolean addAuctionC(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String which_vehicle) {
+	public boolean addAuctionC(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String which_vehicle, String bid) {
 		boolean isAdded = true;
 		try {
 			ResultSet auctionIds = st.executeQuery("SELECT Auction_ID FROM Auction");
@@ -184,14 +185,14 @@ public class Seller {
 			carTab = carTab+"0001-01-01 00:00', '";
 			carTab = carTab+sdt + "',";
 			carTab = carTab+vin + ",";
-			carTab = carTab+which_vehicle + ");";
+			carTab = carTab+which_vehicle+");";
 			//System.out.println(carTab);
 			
 			java.sql.PreparedStatement updateCar=conn.prepareStatement(carTab);
 			int update3 = updateCar.executeUpdate();
 			
 			if(update3 == 0) isAdded = false;
-			String query = "INSERT INTO Auction (winner,start_time,Auction_ID,sellerID,buyerID,vin,end_time,minPrice) VALUES('TBD', '";
+			String query = "INSERT INTO Auction (winner,start_time,Auction_ID,sellerID,buyerID,vin,end_time,minPrice,min_incr) VALUES('TBD', '";
 			query = query.concat(sdt);
 			query = query + "', ";
 			query = query + insertId;
@@ -202,7 +203,8 @@ public class Seller {
 			query = query + ", '";
 			query = query + cdt;
 			query = query + "', ";
-			query = query + minPrice + ");";
+			query = query + minPrice;
+			query = query + ", " + bid +  ");";
 			
 			java.sql.PreparedStatement updateAuc=conn.prepareStatement(query);
 			int update = updateAuc.executeUpdate();
@@ -215,7 +217,7 @@ public class Seller {
 		}
 		return isAdded;
 	}
-	public boolean addAuctionS(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String vehicle_suv) {
+	public boolean addAuctionS(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String vehicle_suv, String bid) {
 		boolean isAdded = true;
 		try {
 			
@@ -248,7 +250,7 @@ public class Seller {
 			if(update3 == 0) isAdded = false;
 			
 			int insertId = maxId + 1;
-			String query = "INSERT INTO Auction (winner,start_time,Auction_ID,sellerID,buyerID,vin,end_time,minPrice) VALUES('TBD', '";
+			String query = "INSERT INTO Auction (winner,start_time,Auction_ID,sellerID,buyerID,vin,end_time,minPrice,min_incr) VALUES('TBD', '";
 			query = query.concat(sdt);
 			query = query + "', ";
 			query = query + insertId;
@@ -259,7 +261,8 @@ public class Seller {
 			query = query + ", '";
 			query = query + cdt;
 			query = query + "', ";
-			query = query + minPrice + ");";
+			query = query + minPrice;
+			query = query + ", " + bid +  ");";
 			java.sql.PreparedStatement updateAucti=conn.prepareStatement(query);
 			int update = updateAucti.executeUpdate();
 			if(update == 0) isAdded = false;

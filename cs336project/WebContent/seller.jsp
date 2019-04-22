@@ -152,6 +152,7 @@ padding: 5px;
         <input type="text" id="vehicle-t" name="vehicle-t" class="require-if-active" data-require-pair="vehicle-type-t">
       </div>
     </div>
+    What is the increment for bids?  <input type="text" id="bid" name="bid" placeholder="1.00" required><br>
 		<button type="submit" name="button" value="addAuction">Add Auction</button><br>
 		</form>
 	</div>
@@ -171,6 +172,7 @@ padding: 5px;
 				<td>End time</td>
 				<td>Minimum Price</td>
 				<td>Current Bid</td>
+				<td>Minimum Increment for Bids</td>
 				<!-- 
 				<td>Color</td>
 				<td>Make</td>
@@ -190,8 +192,9 @@ padding: 5px;
 				<td><%out.println(seller.rs.getString("buyerID")); %></td>
 				<td><%out.println(seller.rs.getDate("start_time")); out.println(seller.rs.getTime("start_time"));%></td>
 				<td><%out.println(seller.rs.getDate("end_time")); out.println(seller.rs.getTime("end_time"));%></td>
-				<td><%out.println(seller.rs.getFloat("minPrice")); %></td>
-				<td><%out.println(seller.rs.getFloat("curr_bid")); %></td>
+				<td><%out.println(seller.rs.getBigDecimal("minPrice")); %></td>
+				<td><%out.println(seller.rs.getBigDecimal("curr_bid")); %></td>
+				<td><%out.println(seller.rs.getBigDecimal("min_incr")); %></td>
 				
 				<!--  
 				<td><%//out.println(seller.rs.getString("Color")); %></td>

@@ -142,7 +142,7 @@ while (rs.next()) {
 <TD><%=rs.getString(8)%></TD>
 <TD><%=rs.getInt("Cylinders")%></TD>
 <TD><%=rs.getString(10)%></TD>
-<TD><%=rs.getInt("curr_bid")%></TD>
+<TD><%=rs.getBigDecimal("curr_bid")%></TD>
 </TR>
 <% } %>
 </TABLE>
@@ -185,7 +185,7 @@ while (rsSuv.next()) {
 <TD><%=rsSuv.getString(8)%></TD>
 <TD><%=rsSuv.getInt("Seats")%></TD>
 <TD><%=rsSuv.getString(10)%></TD>
-<TD><%=rsSuv.getInt("curr_bid")%></TD>
+<TD><%=rsSuv.getBigDecimal("curr_bid")%></TD>
 </TR>
 
 <% } %>
@@ -229,7 +229,7 @@ while (rsTruck.next()) {
 <TD><%=rsTruck.getString(8)%></TD>
 <TD><%=rsTruck.getInt("Axles")%></TD>
 <TD><%=rsTruck.getString(10)%></TD>
-<TD><%=rsTruck.getInt("curr_bid")%></TD>
+<TD><%=rsTruck.getBigDecimal("curr_bid")%></TD>
 </TR>
 
 <% } %>

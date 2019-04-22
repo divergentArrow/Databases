@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="cs336project.*" %>
+<%@ page import="cs336project.*, java.sql.*" %>
 <!DOCTYPE html>
 <html class="bg">
 <style>
@@ -30,27 +30,11 @@ form{
 	border: 2px solid black;
 	background-color: Brown;
 	color: white;
-	width: 50%;
 }
 input{
 	background-color: #FE6301;
 	color: white;
 }
-::-webkit-input-placeholder { /* Chrome */
-  color: #B0AEAE;
-}
-:-ms-input-placeholder { /* IE 10+ */
-  color: #B0AEAE;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  color: #B0AEAE;
-  opacity: 1;
-}
-:-moz-placeholder { /* Firefox 4 - 18 */
-  color: #B0AEAE;
-  opacity: 1;
-}
-
 span{
 	border: 2px solid black;
 	background-color: Brown;
@@ -73,22 +57,45 @@ padding: 5px;
 </style>
 <head>
 <meta charset="ISO-8859-1">
-<title>Admin</title>
+<title>View Bid History</title>
 </head>
 <body>
-<a href="viewAccounts.jsp">View All Existing User Accounts</a><br><br>
-<span>Create customer representative account</span> <br>
+
+<TABLE border="1"
+		style="background-color: Brown; align: center; color: Cornsilk">
+		<TR>
+			<th colspan="3">Bid History</th>
+		</TR>
+
+		<TR>
+			<td>Bid ID</td>
+			<td>Auction ID</td>
+			<td>Seller ID</td>
+			<td>Buyer ID</td>
+			<td>Current Bid</td>
+		</TR>
 <%
 	CustomerRepresentative tempCR = new CustomerRepresentative(session);
-	String tempText = "cr" + tempCR.maxCrid;
-%>
-<form action="addCustomerRepresentative.jsp" method="post">
-Username: <input type="text" id="username" name="username" placeholder=<%=tempText%>><br>
-Password: <input type="text" id="password" name="password" placeholder=<%=tempText%>><br>
-<button type="submit" name="button" value="addAuction">Create customer representative account</button><br>
-</form>
-
-<a href='generateSalesReports.jsp' class=box1>Generate Sales Reports</a>
-
+	try{
+		ResultSet rs = tempCR.getBidHistory();
+		while(rs.next()){
+			%>
+			<TR>
+				<TD><%=rs.getInt(1)%></TD>
+				<TD><%=rs.getInt(2)%></TD>
+				<TD><%=rs.getString(3)%></TD>
+				<TD><%=rs.getString(4)%></TD>
+				<TD><%=rs.getFloat(5)%></TD>
+			</TR>
+			<%
+		}
+		%>
+		</TABLE>
+		<%
+	} catch(Exception e){
+		%>
+		<span>No bids exist yet.</span>
+	<%}%>
+<a href='customerRep.jsp' class=box1>Return to Customer Representative page</a><br>
 </body>
 </html>

@@ -253,4 +253,19 @@ public class CustomerRepresentative {
 			return true;
 		}
 	}
+	
+	public ResultSet getAllAuctions() throws Exception{
+		String query = "SELECT * FROM Auction";
+		return st.executeQuery(query);
+	}
+	
+	public ResultSet getBidHistory() throws Exception{
+		String query = "SELECT * FROM Bid_History";
+		return st.executeQuery(query);
+	}
+	
+	public ResultSet getAllUsers() throws Exception{
+		String query = "SELECT * FROM User";
+		return st.executeQuery(query);
+	}
 }

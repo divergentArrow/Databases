@@ -1,3 +1,6 @@
+<%--
+	@author Fareen Pourmoussavian
+ --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="cs336project.*"%>
 <!DOCTYPE html>
@@ -83,61 +86,44 @@ Connection conn = db.getConnection();
 
 //declare a resultset that uses as a table for output data from tha table.
 ResultSet rs = null;
-
-
+String aucID= request.getParameter("AucID");
+aucID=aucID.trim();
 /* createStatement() is used for create statement object that is used for 
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryV = "SELECT * from Vehicle order by Date_sold;";
-
-rs = statement.executeQuery(QueryV);
+String query = "SELECT a.sellerID,a.vin,a.start_time,a.end_time,b.buyerID,b.current_bid  From Auction a Join Bid_History b ON a.Auction_ID=b.Auction_ID where a.Auction_ID=";
+query= query + aucID +";";
+rs = statement.executeQuery(query);
 
 %>
-<div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Click To Sort By</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="SortMake.jsp">Make</a>
-    <a href="SortModel.jsp">Model</a>
-    <a href="SortPrice.jsp">Price</a>
-    <a href="SortColor.jsp">Color</a>
-    <a href="SortPosted.jsp">Posted_Date</a>
-    <a href="DateSold.jsp">Sold Date</a>
-    <a href=SortVIN.jsp>VIN</a>
-    <a href="SortCylinders.jsp">Cylinders</a>
-    <a href="SortAxles.jsp">Axles</a>
-    <a href="SortSeats.jsp">Seats</a>    
-  </div>
-</div>
 <div align="center">
 <TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
 <TR>
-<th colspan="8">
+<th colspan="10">
 Vehicles
 </th>
 </TR>
 
 <TR>
-<td>Make</td>
-<td>Model</td>
-<td>Price</td>
-<td>Color</td>
-<td>Date Sold</td>
-<td>Date Posted</td>
+<td>Seller ID</td>
 <td>VIN</td>
+<td>Start Time</td>
+<td>End Time</td>
+<td>Buyer ID</td>
+<td>Current Bid</td>
 </TR>
 <%
 while (rs.next()) {
 %>
 
 <TR>
-<TD><%=rs.getString(2)%></TD>
-<TD><%=rs.getString(4)%></TD>
-<TD><%=rs.getInt(3)%></TD>
+<TD><%=rs.getString(1)%></TD>
+<TD><%=rs.getInt(2)%></TD>
+<TD><%=rs.getDate(3)%> <%=rs.getTime(3)%></TD>
+<TD><%=rs.getDate(4)%> <%=rs.getTime(4)%></TD>
 <TD><%=rs.getString(5)%></TD>
-<TD><%=rs.getDate(7)%></TD>
-<TD><%=rs.getDate(6)%></TD>
-<TD><%=rs.getInt(1)%></TD>
+<TD><%=rs.getBigDecimal(6)%></TD>
 </TR>
 
 <% } %>
@@ -159,29 +145,12 @@ out.println("Can't connect to database.");
 <br>
 <br>
 <div align=center>
+<FORM ACTION="itemTable.jsp" method="get" >
+<button type="submit"><-- Back to Auction</button>
+</FORM>
 <FORM ACTION="success.jsp" method="get" >
 <button type="submit"><-- Main Menu</button>
+</FORM>
 </div>
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
 </body>
 </html>

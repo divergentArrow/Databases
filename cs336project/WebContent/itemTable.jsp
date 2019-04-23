@@ -41,6 +41,14 @@ padding: 5px;
   border: none;
   cursor: pointer;
 }
+.dropbtn2 {
+  background-color: #3498DB;
+  color: black;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
 .dropbtn:hover, .dropbtn:focus {
   background-color: #2980B9;
 }
@@ -58,6 +66,21 @@ padding: 5px;
   z-index: 1;
 }
 .dropdown-content a {
+  color: black;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content2 {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content2 a {
   color: black;
   padding: 10px 14px;
   text-decoration: none;
@@ -109,6 +132,17 @@ rsTruck = statement2.executeQuery(QueryTruck);
     <a href="itemTable.jsp">Vehicle Type</a>   
   </div>
 </div>
+<div align=right>
+  <div  align=right class="dropdown">
+  <button onclick="myFunction2()" class="dropbtn2">Click To View Auction by</button>
+  <div id="drop2" class="dropdown-content2">
+    <a href="SearchAuction.jsp">Auction ID</a>
+    <a href="SearchBuyer.jsp">Buyer ID</a>
+    <a href="SearchSeller.jsp">Seller ID</a>
+  </div>
+</div>
+</div>
+
 <div align="center">
 <TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
 <TR>
@@ -278,6 +312,22 @@ window.onclick = function(event) {
     }
   }
 }
+function myFunction2() {
+	  document.getElementById("drop2").classList.toggle("show");
+	}
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.dropbtn2')) {
+	    var dropdowns = document.getElementsByClassName("dropdown-content2");
+	    var i;
+	    for (i = 0; i < dropdowns.length; i++) {
+	      var openDropdown = dropdowns[i];
+	      if (openDropdown.classList.contains('show')) {
+	        openDropdown.classList.remove('show');
+	      }
+	    }
+	  }
+	}
 </script>
 </body>
 </html>

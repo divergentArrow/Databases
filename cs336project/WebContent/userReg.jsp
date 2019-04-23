@@ -1,3 +1,6 @@
+<%--
+	@author Fareen Pourmoussavian
+ --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="cs336project.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -80,6 +83,7 @@
 		conn.close();
 		out.println("insert succeeded ");
 		session.setAttribute("user", usern); // the username will be stored in the session
+		session.setAttribute("pass", passcode);
         out.println("welcome " + usern);
         out.println("<a href='logout.jsp'>Log out</a>");
         response.sendRedirect("success.jsp");

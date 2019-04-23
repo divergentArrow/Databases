@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="cs336project.*" %>
+    
 <!DOCTYPE html>
 <html class="bg">
 <style>
@@ -38,10 +39,15 @@ input{
 	background-color: #FE6301;
 	color: white;
 }
-div span{
+span{
 	border: 2px solid black;
 	background-color: Brown;
 	color: white;
+}
+a{
+	border: 2px solid black;
+	background-color: tan;
+	color: blue;
 }
 td{
 margin:5px;
@@ -52,39 +58,56 @@ font-size:22px;
 padding: 5px;
 }
 .show {display: block;}
-</style>
-
-<head>
+</style><head>
 <meta charset="ISO-8859-1">
-<title>Modify Seller</title>
+<title>Earnings per Item</title>
 </head>
-
 <body>
-	<div>
-	<%		
-			Seller seller = new Seller(session);
-			String vin = request.getParameter("vin");
-			String sdt = request.getParameter("sdt");
-			String cdt = request.getParameter("cdt");
-			String minPrice = request.getParameter("minPrice");
-			boolean success = false;
-			if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()){
-				if(minPrice.isEmpty()){
-					success = seller.updateItem(vin, sdt, cdt);
-				} else{
-					success = seller.updateItem(vin, sdt, cdt, minPrice);
-				}
-			}
-			
-			if(success){
-				out.println("Success! Item modification request sent.<br>");
-				out.println("This does NOT mean the request was valid!<br>");
-				out.println("Return to Seller page to see result.<br>");
-			}
-			else{
-				out.println("Error with input! Try again.<br>");
-			}
+	
+	<%
+		User admin = new User(session);
+		try{
+			admin.rs = admin.getEarningsPerItem();
+	%>
+
+	<TABLE border="1"
+		style="background-color: Brown; align: center; color: Cornsilk">
+		<TR>
+			<th colspan="2">Earnings per Item</th>
+		</TR>
+
+		<TR>
+			<td>VIN</td>
+			<td>Earnings</td>
+		</TR>
+		<%
+			while (admin.rs.next()) {
+				float sales = admin.rs.getFloat(2);
+				String formattedSales = String.format("%.02f", sales);
 		%>
-	<a href='seller.jsp' class=box1>Return to Seller page</a>
-	</div>
+
+		<TR>
+			<TD><%=admin.rs.getInt(1)%></TD>
+			<TD>$<%=formattedSales %></TD>
+		</TR>
+
+		<% }
+		} catch(Exception e){
+		%>
+		<TR>
+			<TD>NO SOLD ITEMS EXIST YET</TD>
+			<TD>0</TD>
+		</TR>
+		<%
+		}
+		%>
+	</TABLE>
+
+
+	<br>
+	<br>
+	
+	<a href="generateSalesReports.jsp" class=box1>Return to Sales Reports page</a><br>
+	<a href="admin.jsp" class=box1>Return to Admin page</a>
 </body>
+</html>

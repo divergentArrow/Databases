@@ -3,7 +3,7 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="cs336project.*" %>
+<%@ page import="cs336project.*, java.sql.*" %>
 <!DOCTYPE html>
 <html class="bg">
 <style>
@@ -38,10 +38,15 @@ input{
 	background-color: #FE6301;
 	color: white;
 }
-div span{
+span{
 	border: 2px solid black;
 	background-color: Brown;
 	color: white;
+}
+a{
+	border: 2px solid black;
+	background-color: tan;
+	color: blue;
 }
 td{
 margin:5px;
@@ -53,38 +58,47 @@ padding: 5px;
 }
 .show {display: block;}
 </style>
-
 <head>
 <meta charset="ISO-8859-1">
-<title>Modify Seller</title>
+<title>View Bid History</title>
 </head>
-
 <body>
-	<div>
-	<%		
-			Seller seller = new Seller(session);
-			String vin = request.getParameter("vin");
-			String sdt = request.getParameter("sdt");
-			String cdt = request.getParameter("cdt");
-			String minPrice = request.getParameter("minPrice");
-			boolean success = false;
-			if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()){
-				if(minPrice.isEmpty()){
-					success = seller.updateItem(vin, sdt, cdt);
-				} else{
-					success = seller.updateItem(vin, sdt, cdt, minPrice);
-				}
-			}
-			
-			if(success){
-				out.println("Success! Item modification request sent.<br>");
-				out.println("This does NOT mean the request was valid!<br>");
-				out.println("Return to Seller page to see result.<br>");
-			}
-			else{
-				out.println("Error with input! Try again.<br>");
-			}
+
+<TABLE border="1"
+		style="background-color: Brown; align: center; color: Cornsilk">
+		<TR>
+			<th colspan="3">Bid History</th>
+		</TR>
+
+		<TR>
+			<td>Bid ID</td>
+			<td>Auction ID</td>
+			<td>Seller ID</td>
+			<td>Buyer ID</td>
+			<td>Current Bid</td>
+		</TR>
+<%
+	CustomerRepresentative tempCR = new CustomerRepresentative(session);
+	try{
+		ResultSet rs = tempCR.getBidHistory();
+		while(rs.next()){
+			%>
+			<TR>
+				<TD><%=rs.getInt(1)%></TD>
+				<TD><%=rs.getInt(2)%></TD>
+				<TD><%=rs.getString(3)%></TD>
+				<TD><%=rs.getString(4)%></TD>
+				<TD><%=rs.getFloat(5)%></TD>
+			</TR>
+			<%
+		}
 		%>
-	<a href='seller.jsp' class=box1>Return to Seller page</a>
-	</div>
+		</TABLE>
+		<%
+	} catch(Exception e){
+		%>
+		<span>No bids exist yet.</span>
+	<%}%>
+<a href='customerRep.jsp' class=box1>Return to Customer Representative page</a><br>
 </body>
+</html>

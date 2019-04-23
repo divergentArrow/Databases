@@ -38,10 +38,15 @@ input{
 	background-color: #FE6301;
 	color: white;
 }
-div span{
+span{
 	border: 2px solid black;
 	background-color: Brown;
 	color: white;
+}
+a{
+	border: 2px solid black;
+	background-color: tan;
+	color: blue;
 }
 td{
 margin:5px;
@@ -53,38 +58,47 @@ padding: 5px;
 }
 .show {display: block;}
 </style>
-
 <head>
 <meta charset="ISO-8859-1">
-<title>Modify Seller</title>
+<title>Delete Auction</title>
 </head>
-
 <body>
-	<div>
-	<%		
-			Seller seller = new Seller(session);
-			String vin = request.getParameter("vin");
-			String sdt = request.getParameter("sdt");
-			String cdt = request.getParameter("cdt");
-			String minPrice = request.getParameter("minPrice");
-			boolean success = false;
-			if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()){
-				if(minPrice.isEmpty()){
-					success = seller.updateItem(vin, sdt, cdt);
-				} else{
-					success = seller.updateItem(vin, sdt, cdt, minPrice);
-				}
-			}
-			
-			if(success){
-				out.println("Success! Item modification request sent.<br>");
-				out.println("This does NOT mean the request was valid!<br>");
-				out.println("Return to Seller page to see result.<br>");
-			}
-			else{
-				out.println("Error with input! Try again.<br>");
-			}
+<span>Delete Auction Results:</span> <br>
+<%
+	CustomerRepresentative cr = new CustomerRepresentative(session);
+	String auctionID = request.getParameter("dauctionID");
+	
+	int auctionIDInt;
+
+	if(auctionID.isEmpty()){
 		%>
-	<a href='seller.jsp' class=box1>Return to Seller page</a>
-	</div>
+		<span>You need to provide an Auction ID!</span><br>
+		<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>
+		<%
+		return;
+	}
+	
+	
+	try{
+		auctionIDInt = Integer.parseInt(auctionID);
+		boolean success = cr.removeAuction(auctionID);
+		if(success){
+			%>
+			<span>Successfully deleted Auction #<%=auctionID %>!</span><br>
+			<%
+		} else{
+			%>
+			<span>This auction does not exist!</span><br>
+			<%
+		}
+	} catch(Exception e){
+		%>
+		<span>This auction does not exist!</span><br>
+		<%
+	}
+%>
+
+<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>
+
 </body>
+</html>

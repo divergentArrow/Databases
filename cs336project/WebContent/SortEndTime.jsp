@@ -1,3 +1,6 @@
+<%--
+	@author Fareen Pourmoussavian
+ --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="cs336project.*"%>
 <!DOCTYPE html>
@@ -32,22 +35,27 @@ padding: 5px;
 }
 .dropbtn {
   background-color: #3498DB;
-  color: white;
-  padding: 16px;
+  color: black;
+  padding: 12px;
   font-size: 16px;
   border: none;
   cursor: pointer;
 }
-
+.dropbtn2 {
+  background-color: #3498DB;
+  color: black;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
 .dropbtn:hover, .dropbtn:focus {
   background-color: #2980B9;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -57,16 +65,28 @@ padding: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  padding: 10px 14px;
   text-decoration: none;
   display: block;
 }
-
+.dropdown-content2 {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content2 a {
+  color: black;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+}
 .dropdown a:hover {background-color: #ddd;}
-
 .show {display: block;}
 </style>
 <head>
@@ -89,7 +109,7 @@ ResultSet rs = null;
 sending sql statements to the specified database. */
 Statement statement = conn.createStatement();
 // sql query to retrieve values from the secified table.
-String QueryV = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,v.VIN,v.Make,v.Model,v.Color,a.buyerID,Auction_System.current_bid from Auction a JOIN Vehicle v ON v.VIN=a.vin JOIN Auction_System ON Auction_System.VIN=a.vin  group by (Auction_ID) order by end_time;";
+String QueryV = "Select Distinct a.Auction_ID,a.start_time,a.end_time,a.sellerID,v.VIN,v.Make,v.Model,v.Color,a.buyerID,a.curr_bid from Auction a JOIN Vehicle v ON v.VIN=a.vin group by (Auction_ID) order by end_time;";
 
 rs = statement.executeQuery(QueryV);
 
@@ -107,8 +127,18 @@ rs = statement.executeQuery(QueryV);
     <a href="SortCylinders.jsp">Cylinders</a>
     <a href="SortAxles.jsp">Axles</a>
     <a href="SortSeats.jsp">Seats</a>  
-    <a href="itemTable.jsp">Vehicle Type</a>  
+    <a href="itemTable.jsp">Vehicle Type</a>   
   </div>
+</div>
+<div align=right>
+  <div  align=right class="dropdown">
+  <button onclick="myFunction2()" class="dropbtn2">Click To View Auction by</button>
+  <div id="drop2" class="dropdown-content2">
+    <a href="SearchAuction.jsp">Auction ID</a>
+    <a href="SearchBuyer.jsp">Buyer ID</a>
+    <a href="SearchSeller.jsp">Seller ID</a>
+  </div>
+</div>
 </div>
 <div align="center">
 <TABLE border="1" style="background-color: Brown; align:center; color: Cornsilk">
@@ -144,7 +174,7 @@ while (rs.next()) {
 <TD><%=rs.getString(7)%></TD>
 <TD><%=rs.getString(8)%></TD>
 <TD><%=rs.getString(9)%></TD>
-<TD><%=rs.getInt("current_bid")%></TD>
+<TD><%=rs.getBigDecimal("curr_bid")%></TD>
 </TR>
 
 <% } %>
@@ -174,22 +204,37 @@ out.println("Can't connect to database.");
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
+	  document.getElementById("myDropdown").classList.toggle("show");
+	}
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.dropbtn')) {
+	    var dropdowns = document.getElementsByClassName("dropdown-content");
+	    var i;
+	    for (i = 0; i < dropdowns.length; i++) {
+	      var openDropdown = dropdowns[i];
+	      if (openDropdown.classList.contains('show')) {
+	        openDropdown.classList.remove('show');
+	      }
+	    }
+	  }
+	}
+	function myFunction2() {
+		  document.getElementById("drop2").classList.toggle("show");
+		}
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(event) {
+		  if (!event.target.matches('.dropbtn2')) {
+		    var dropdowns = document.getElementsByClassName("dropdown-content2");
+		    var i;
+		    for (i = 0; i < dropdowns.length; i++) {
+		      var openDropdown = dropdowns[i];
+		      if (openDropdown.classList.contains('show')) {
+		        openDropdown.classList.remove('show');
+		      }
+		    }
+		  }
+		}
 </script>
 </body>
 </html>

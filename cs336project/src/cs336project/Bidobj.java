@@ -3,30 +3,25 @@ package cs336project;
  * @author Kamarudeen Ayankunbi
  */
 public class Bidobj {
-	long bidId;
-	long bidamount;
-	public long getBidId() {
-		return bidId;
+	String  buyerName;
+	float bidamount;
+	public Bidobj(String string, float long1) {
+		this.buyerName=string;
+		this.bidamount=long1;
 	}
-
-	public void setBidId(long bidId) {
-		this.bidId = bidId;
+	public String getBuyerName() {
+		return buyerName;
 	}
-
-	public long getBidamount() {
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
+	}
+	public float getBidamount() {
 		return bidamount;
 	}
-
-	public void setBidamount(long bidamount) {
+	public void setBidamount(float bidamount) {
 		this.bidamount = bidamount;
 	}
-
-	public Bidobj() {
-
-	}
 	
-	public Bidobj(long bidId,long bidAmount) {
-		this.bidId=bidId;
-		this.bidamount=bidAmount;
-	}
+	
+	
 }

@@ -97,9 +97,6 @@ padding: 5px;
 }
 .show {display: block;}
 </style>
-
-}
-</style>
 <head>
 <meta charset="ISO-8859-1">
 <title>Sell</title>
@@ -110,12 +107,44 @@ padding: 5px;
 		<span>Modify item characteristics or add an auction</span>
 		<br></br>
 		<form action="sellerModify.jsp" method="post">
-		VIN: <input type="text" id="vin" name="vin" placeholder="123456789"><br>
+		Specify VIN of Vehicle you want to edit: <input type="text" id="vin" name="vin" placeholder="123456789"><br>
 		Set start date and time: <input type="text" id="sdt" name="sdt" placeholder="YYYY-MM-DD HH:MM:SS"/><br>
 		Set closing date and time: <input type="text" id="cdt" name="cdt" placeholder="YYYY-MM-DD HH:MM:SS"/><br>
 		Set minimum price: <input type="text" id="minPrice" name="minPrice" placeholder="123.45"/><br>
+		Vehicle Color: <input type="text" id="color" name="color" placeholder="Color of Vehicle" required><br>
+		Make: <input type="text" id="make" name="make" placeholder="Vehicle Maker" required><br>
+		Model: <input type="text" id="model" name="model" placeholder="Vehicle Model" required><br>
+		<div>
+      <input type="radio" name="vehicles" id="vehicle-type-c" value="cars" required>
+      <label for="vehicle-type-c">Car</label>
+      <div class="reveal-if-active">
+        <label for="which-vehicle">How many cylinders does it have?</label>
+        <input type="text" id="which-vehicle" name="which-vehicle" class="require-if-active" data-require-pair="#vehicle-type-c">
+      </div>
+    </div>
+    <div>
+      <input type="radio" name="vehicles" id="vehicle-type-s" value="suv" required>
+      <label for="vehicle-type-s">SUV</label>
+    
+      <div class="reveal-if-active">
+        <label for="vehicle-s">How many seats are there?</label>
+        <input type="text" id="vehicle-s" name="vehicle-s" class="require-if-active" data-require-pair="#vehicle-type-s">
+      </div>
+    </div>
+      <div>
+      <input type="radio" name="vehicles" id="vehicle-type-t" value="truck" required>
+      <label for="vehicle-type-t">Truck</label>
+    
+      <div class="reveal-if-active">
+        <label for="vehicle-t">How many axles does it have?</label>
+        <input type="text" id="vehicle-t" name="vehicle-t" class="require-if-active" data-require-pair="vehicle-type-t">
+      </div>
+    </div>
+    What is the increment for bids?  <input type="text" id="bid" name="bid" placeholder="1.00" required><br>
 		<button type="submit" name="button" value="modifyItem">Modify Item</button><br>
 		</form>
+	</div>
+		
 		<br></br>
 		<form action="sellerAddAuction.jsp" method="post">
 		VIN: <input type="text" id="vin" name="vin" placeholder="123456789" required><br>

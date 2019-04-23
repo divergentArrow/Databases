@@ -64,18 +64,64 @@ padding: 5px;
 	<%		
 			Seller seller = new Seller(session);
 			String vin = request.getParameter("vin");
+			vin=vin.trim();
 			String sdt = request.getParameter("sdt");
+			sdt=sdt.trim();
 			String cdt = request.getParameter("cdt");
+			cdt=cdt.trim();
 			String minPrice = request.getParameter("minPrice");
+			minPrice=minPrice.trim();
+			String color = request.getParameter("color");
+			color=color.trim();
+			String make = request.getParameter("make");
+			make=make.trim();
+			String model = request.getParameter("model");
+			model=model.trim();
+			String bid = request.getParameter("bid");
+			String vehicle = request.getParameter("vehicles");
+			
 			boolean success = false;
-			if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()){
-				if(minPrice.isEmpty()){
-					success = seller.updateItem(vin, sdt, cdt);
-				} else{
-					success = seller.updateItem(vin, sdt, cdt, minPrice);
+			if(vehicle.equals("truck")){
+				
+				String vehicle_truck = request.getParameter("vehicle-t");
+				vehicle_truck=vehicle_truck.trim();
+				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_truck.isEmpty()&& !bid.isEmpty()){
+					if(minPrice.isEmpty()){
+						throw new NullPointerException("minPrice");
+					} 
+					else{
+						success = seller.updateAuctionT(vin, sdt, cdt, minPrice,color,make,model,vehicle_truck,bid);
+					}
 				}
 			}
-			
+			else if(vehicle.equals("cars")){
+				String which_vehicle = request.getParameter("which-vehicle");
+				which_vehicle=which_vehicle.trim();
+				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!which_vehicle.isEmpty()&&!bid.isEmpty()){
+					if(minPrice.isEmpty()){
+						throw new NullPointerException("minPrice");
+					} 
+					else{
+						success = seller.updateAuctionC(vin, sdt, cdt, minPrice,color,make,model,which_vehicle,bid);
+					}
+				}
+			}
+			else if(vehicle.equals("suv")){
+				String vehicle_suv= request.getParameter("vehicle-s");
+				vehicle_suv=vehicle_suv.trim();
+				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_suv.isEmpty()&& !bid.isEmpty()){
+					if(minPrice.isEmpty()){
+						throw new NullPointerException("minPrice");
+					} 
+					else{
+						success = seller.updateAuctionS(vin, sdt, cdt, minPrice,color,make,model,vehicle_suv,bid);
+					}
+				}
+			}
+			%>
+			<div align=center class=box2>
+			<p>
+			<%
 			if(success){
 				out.println("Success! Item modification request sent.<br>");
 				out.println("This does NOT mean the request was valid!<br>");

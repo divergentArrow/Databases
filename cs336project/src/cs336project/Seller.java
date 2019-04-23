@@ -64,36 +64,111 @@ public class Seller {
 		return s;
 	}
 	
-	public boolean updateItem(String vin, String sdt, String cdt, String minPrice) {
-		boolean isUpdated = true;
+	public boolean updateAuctionT(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String vehicle_truck, String bid) {
+		boolean isAdded = true;
 		try {
-			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='" + cdt + "', minPrice=" + minPrice + " WHERE vin=" + vin + ";";
-			int success = st.executeUpdate(query);
-			if(success == 0) {
-				isUpdated = false;
+			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='"+ cdt +"', minPrice="+ minPrice;
+			query = query + ", min_incr="+ bid + " WHERE VIN="+ vin +" AND sellerID='"+ session.getAttribute("user") + "';";
+			java.sql.PreparedStatement updateAuc=conn.prepareStatement(query);
+			int update = updateAuc.executeUpdate();
+			if(update == 0) {
+				isAdded = false;
+				throw new NullPointerException("Invalid");
 			}
-		} catch(Exception e) {
+			
+			String vTab = "Update Vehicle SET make='" + make + "', model='"+ model+"',color='"+color+"', date_posted='";
+			vTab=vTab+sdt+"' WHERE VIN=" + vin + ";";
+			java.sql.PreparedStatement updateVeh=conn.prepareStatement(vTab);
+			int update2 = updateVeh.executeUpdate();
+			if(update2 == 0) isAdded = false;
+			
+			String carTab="Update Truck SET make='"+ make + "', model='"+ model+"',color='"+color+"', date_posted='";
+			carTab = carTab+sdt + "', axles=" + vehicle_truck + " WHERE VIN=" + vin + ";";
+			java.sql.PreparedStatement updateTruck=conn.prepareStatement(carTab);
+			int update3 = updateTruck.executeUpdate();
+			if(update3 == 0) isAdded = false;
+
+		}
+		catch(NullPointerException ex) {
+			System.out.println("You might not be authorized to make these changes. Please log in with the account that created that auction.");
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Error in input");
-			isUpdated=false;
+			isAdded=false;
 		}
-		return isUpdated;
+		return isAdded;
 	}
 	
-	public boolean updateItem(String vin, String sdt, String cdt) {
-		boolean isUpdated = true;
+	public boolean updateAuctionC(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String which_vehicle, String bid) {
+		boolean isAdded = true;
 		try {
-			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='" + cdt + "' WHERE vin=" + vin + ";";
-			int success = st.executeUpdate(query);
-			if(success == 0) {
-				isUpdated = false;
+			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='"+ cdt +"', minPrice="+ minPrice;
+			query = query + ", min_incr="+ bid + " WHERE VIN="+ vin +" AND sellerID='"+ session.getAttribute("user") + "';";
+			java.sql.PreparedStatement updateAuc=conn.prepareStatement(query);
+			int update = updateAuc.executeUpdate();
+			if(update == 0) {
+				isAdded = false;
+				throw new NullPointerException("Invalid");
 			}
-		} catch(Exception e) {
+			
+			String vTab = "Update Vehicle SET make='" + make + "', model='"+ model+"',color='"+color+"', date_posted='";
+			vTab=vTab+sdt+"' WHERE VIN=" + vin + ";";
+			java.sql.PreparedStatement updateVeh=conn.prepareStatement(vTab);
+			int update2 = updateVeh.executeUpdate();
+			if(update2 == 0) isAdded = false;
+			
+			String carTab="Update Truck SET make='"+ make + "', model='"+ model+"',color='"+color+"', date_posted='";
+			carTab = carTab+sdt + "', axles=" + which_vehicle + " WHERE VIN=" + vin + ";";
+			java.sql.PreparedStatement updateTruck=conn.prepareStatement(carTab);
+			int update3 = updateTruck.executeUpdate();
+			if(update3 == 0) isAdded = false;
+			
+			
+
+		}
+		catch(NullPointerException ex) {
+			System.out.println("You might not be authorized to make these changes. Please log in with the account that created that auction.");
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Error in input");
-			isUpdated=false;
+			isAdded=false;
 		}
-		return isUpdated;
+		
+		return isAdded;
+	}
+	public boolean updateAuctionS(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String vehicle_suv, String bid) {
+		boolean isAdded = true;
+		try {
+			String query = "UPDATE Auction SET start_time='" + sdt + "', end_time='"+ cdt +"', minPrice="+ minPrice;
+			query = query + ", min_incr="+ bid + " WHERE VIN="+ vin +" AND sellerID='"+ session.getAttribute("user") + "';";
+			java.sql.PreparedStatement updateAuc=conn.prepareStatement(query);
+			int update = updateAuc.executeUpdate();
+			if(update == 0) {
+				isAdded = false;
+				throw new NullPointerException("Invalid");
+			}
+			
+			String vTab = "Update Vehicle SET make='" + make + "', model='"+ model+"',color='"+color+"', date_posted='";
+			vTab=vTab+sdt+"' WHERE VIN=" + vin + ";";
+			java.sql.PreparedStatement updateVeh=conn.prepareStatement(vTab);
+			updateVeh.executeUpdate();
+	
+			String carTab="Update Truck SET make='"+ make + "', model='"+ model+"',color='"+color+"', date_posted='";
+			carTab = carTab+sdt + "', axles=" + vehicle_suv + " WHERE VIN=" + vin + ";";
+			java.sql.PreparedStatement updateTruck=conn.prepareStatement(carTab);
+			updateTruck.executeUpdate();
+	
+		}catch(NullPointerException ex) {
+			System.out.println("You might not be authorized to make these changes. Please log in with the account that created that auction.");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Error in input");
+			isAdded=false;
+		}
+		return isAdded;
 	}
 	
 	public boolean addAuctionT(String vin, String sdt, String cdt, String minPrice, String color, String make, String model, String vehicle_truck, String bid) {

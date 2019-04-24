@@ -78,16 +78,19 @@ align: center;}
 	<div align="center" class=box2>
 	<h1 align=center >
 	Welcome <%=session.getAttribute("user")%>!</h1>
-	<a href='seller.jsp' class=box1>Sell</a>
-	</div>  <!--//this will display the username that is stored in the session.-->
+	</div>
 	</center>
+	<br>
+	<div align="center">
+	<a href='buyer.jsp' class=box1>Buy</a>&nbsp &nbsp &nbsp<a href='seller.jsp' class=box1>Sell</a>
+	</div>
 	<br>
 	<br>
 		<center><div align="center" class=box3><A HREF="itemTable.jsp" ><h2 style="color:white">Show data from table</h2></A></div></center>
 <br>
 <br>
 	<a href='logout.jsp' class=box1>Log out</a>
-	<a href='buyer.jsp' class=box1>buyer</a>
+	
 	
 	</body>
 	</html>

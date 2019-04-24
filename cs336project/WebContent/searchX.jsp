@@ -53,5 +53,6 @@ window.onclick = function(event) {
 }
 </script>
 	</div>
+	<a href='success.jsp' class=box1>Go Back Home</a><br>
 </body>
 </html>

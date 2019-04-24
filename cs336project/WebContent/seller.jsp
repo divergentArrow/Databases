@@ -43,6 +43,13 @@
 	background-size: cover;
 	height: 100%;
 }
+body {
+	background:url("https://i.imgur.com/Qbv02Bu.jpg?") no-repeat;
+	background-position: 25% 25%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+}
 .box2{
   padding: 4px 4px;
   margin-bottom: 7px;
@@ -96,6 +103,11 @@ padding: 5px;
   opacity: 1;
 }
 .show {display: block;}
+@media print {
+body {
+   content:url(images/mybg.png);
+  }
+}
 </style>
 <head>
 <meta charset="ISO-8859-1">

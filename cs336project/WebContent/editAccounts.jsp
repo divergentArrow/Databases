@@ -80,6 +80,7 @@ padding: 5px;
 	if(user.equalsIgnoreCase("admin")){
 		%>
 		<span>You don't have permission to edit this account!</span><br>
+		<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>
 		<%
 		return;
 	} else if(user.charAt(0) == 'c' && user.charAt(1) == 'r'){
@@ -87,6 +88,7 @@ padding: 5px;
 			int i = Integer.parseInt(user.substring(2));
 			%>
 			<span>You don't have permission to edit this account!</span><br>
+			<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>
 			<%
 			return;
 		} catch(NumberFormatException e){
@@ -109,12 +111,14 @@ padding: 5px;
 			e.printStackTrace();
 			%>
 			<span>Error: Maximum Bid must be a floating point number!</span><br>
+			<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>
 			<%
 			return;
 		} catch(Exception e){
 			e.printStackTrace();
 			%>
 			<span>An error occurred with the query. Please check all of your inputs and try again.</span><br>
+			<a href='customerRep.jsp' class=box1>Return to Customer Representative Page</a>
 			<%
 		}
 	}

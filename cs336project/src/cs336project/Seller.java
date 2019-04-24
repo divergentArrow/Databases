@@ -209,7 +209,7 @@ public class Seller {
 			query = query + insertId;
 			query = query + ", '";
 			query = query + session.getAttribute("user");
-			query = query + "', 'tbd', ";
+			query = query + "', 'TBD', ";
 			query = query + vin;
 			query = query + ", '";
 			query = query + cdt;
@@ -273,7 +273,7 @@ public class Seller {
 			query = query + insertId;
 			query = query + ", '";
 			query = query + session.getAttribute("user");
-			query = query + "', 'tbd', ";
+			query = query + "', 'TBD', ";
 			query = query + vin;
 			query = query + ", '";
 			query = query + cdt;
@@ -331,7 +331,7 @@ public class Seller {
 			query = query + insertId;
 			query = query + ", '";
 			query = query + session.getAttribute("user");
-			query = query + "', 'tbd', ";
+			query = query + "', 'TBD', ";
 			query = query + vin;
 			query = query + ", '";
 			query = query + cdt;

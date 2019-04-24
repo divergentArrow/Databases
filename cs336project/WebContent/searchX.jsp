@@ -42,7 +42,7 @@
 		</div>
 
 		<script>
-// Get the modal kj;lkj 
+// Get the modal kj;lkj sadf
 var modal = document.getElementById('id01');
 var modal = document.getElementById('id02');
 // When the user clicks anywhere outside of the modal, close it

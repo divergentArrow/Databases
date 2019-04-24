@@ -16,7 +16,7 @@ out.println("<body>");
 	
 	Statement statement = conn.createStatement();
 
-    // System.out.println(ques) ; lkj ;lkj
+    // System.out.println(ques) ; lkj ;lkjsda
    
     Statement st = conn.createStatement();
     ResultSet rs;

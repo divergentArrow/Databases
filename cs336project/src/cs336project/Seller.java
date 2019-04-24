@@ -349,6 +349,17 @@ public class Seller {
 		}
 		return isAdded;
 	}
+	
+	public int getNextVIN(){
+		try {
+			ResultSet tempRS = st.executeQuery("SELECT MAX(VIN) FROM Vehicle");
+			tempRS.next();
+			return tempRS.getInt(1) + 1;
+		} catch(Exception e) {
+			return 0;
+		}
+	}
+	
 	public void closeConnection() throws Exception{
 		conn.close();
 	}

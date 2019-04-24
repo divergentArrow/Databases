@@ -81,10 +81,6 @@ align: center;}
 	</div>
 	</center>
 	<br>
-	<div align="center">
-	<a href='buyer.jsp' class=box1>Buy</a>&nbsp &nbsp &nbsp<a href='seller.jsp' class=box1>Sell</a>
-	</div>
-	<br>
 	<br>
 	<center>
 	<div><a href='seller.jsp' class=box1>Sell</a>

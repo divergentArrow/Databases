@@ -72,8 +72,6 @@ padding: 5px;
 <body>
 	<%
 			Seller seller = new Seller(session);
-			String vin = request.getParameter("vin");
-			vin=vin.trim();
 			String sdt = request.getParameter("sdt");
 			sdt=sdt.trim();
 			String cdt = request.getParameter("cdt");
@@ -88,14 +86,17 @@ padding: 5px;
 			model=model.trim();
 			String bid = request.getParameter("bid");
 			String vehicle = request.getParameter("vehicles");
+			int vinInt = seller.getNextVIN();
+			String vin = "" + vinInt;
+			
 			boolean success = false;
+			
 			try{
-
 			if(vehicle.equals("truck")){
 				
 				String vehicle_truck = request.getParameter("vehicle-t");
 				vehicle_truck=vehicle_truck.trim();
-				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_truck.isEmpty()&& !bid.isEmpty()){
+				if(!sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_truck.isEmpty()&& !bid.isEmpty()){
 					if(minPrice.isEmpty()){
 						throw new NullPointerException("minPrice");
 					} 
@@ -107,7 +108,7 @@ padding: 5px;
 			else if(vehicle.equals("cars")){
 				String which_vehicle = request.getParameter("which-vehicle");
 				which_vehicle=which_vehicle.trim();
-				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!which_vehicle.isEmpty()&&!bid.isEmpty()){
+				if(!sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!which_vehicle.isEmpty()&&!bid.isEmpty()){
 					if(minPrice.isEmpty()){
 						throw new NullPointerException("minPrice");
 					} 
@@ -119,7 +120,7 @@ padding: 5px;
 			else if(vehicle.equals("suv")){
 				String vehicle_suv= request.getParameter("vehicle-s");
 				vehicle_suv=vehicle_suv.trim();
-				if(!vin.isEmpty() && !sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_suv.isEmpty()&& !bid.isEmpty()){
+				if(!sdt.isEmpty() && !cdt.isEmpty()&& !color.isEmpty() && !make.isEmpty() && !model.isEmpty() &&!vehicle_suv.isEmpty()&& !bid.isEmpty()){
 					if(minPrice.isEmpty()){
 						throw new NullPointerException("minPrice");
 					} 

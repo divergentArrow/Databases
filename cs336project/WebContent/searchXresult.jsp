@@ -50,6 +50,8 @@ out.println("<body>");
     conn.close();
     %>
     </TABLE>
-    </font>
+    <a href='success.jsp' class=box1>Home</a><br>
+	<br>
+	<a href='logout.jsp' class=box1>Log out</a>
     </body>
     </html>

@@ -79,15 +79,23 @@ padding: 5px;
 			if(!pass.isEmpty() && pass!=null){
 				success = cr.addCustomerRep(user, pass);
 				if(success){
-					out.println("New customer representative successfully added!");
+					%>
+					<span>New customer representative successfully added!</span><br>
+					<%
 				} else{
-					out.println("Uh oh! Something went wrong!");
+					%>
+					<span>Uh oh! Something went wrong!</span><br>
+					<%
 				}
 			} else{
-				out.println("Password field cannot be empty!");
+				%>
+				<span>Password field cannot be empty!</span><br>
+				<%
 			}
 		} else{
-			out.println("Username field cannot be empty!");
+			%>
+			<span>Username field cannot be empty!</span><br>
+			<%
 		}
 	%>
 	
